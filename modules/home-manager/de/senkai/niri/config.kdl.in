@@ -82,7 +82,6 @@ workspace "system-monitor"
 workspace "code"
 workspace "web"
 workspace "chat"
-workspace "scratch"
 // Startup Programs
 spawn-at-startup "@XWAYLAND_SATELLITE_EXE@"
 spawn-at-startup "@SWAYBG_EXE@" "-i" "@WALLPAPER@"
@@ -155,7 +154,7 @@ binds {
         focus-workspace "chat"
     }
     Mod+4 {
-        focus-workspace "scratch"
+        focus-workspace 5
     }
     Mod+Ctrl+0 {
         move-window-to-workspace "system-monitor"
@@ -170,7 +169,7 @@ binds {
         move-window-to-workspace "chat"
     }
     Mod+Ctrl+4 {
-        move-window-to-workspace "scratch"
+        move-window-to-workspace 5
     }
     // Monitor Navigation
     Mod+Shift+L {
