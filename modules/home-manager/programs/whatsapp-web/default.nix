@@ -13,9 +13,9 @@ with lib; let
 in {
   options.internal.programs.whatsapp-web = {
     enable = mkEnableOption "whatsapp-web";
-    exe = mkOption {
-      type = types.str;
-      default = whatsappWebExe;
+    package = mkOption {
+      type = types.package;
+      default = whatsappWebBin;
       readOnly = true;
     };
   };

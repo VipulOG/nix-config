@@ -36,6 +36,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    base16 = {
+      url = "github:SenchoPens/base16.nix";
+    };
+
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -77,27 +81,27 @@
       systems = ["x86_64-linux" "aarch64-linux"];
 
       perSystem = {system, ...}: {
-        _module.args.pkgs = import inputs.nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
+        _module = {
+          args = {
+            pkgs = import inputs.nixpkgs {
+              inherit system;
+              config.allowUnfree = true;
+            };
 
-        _module.args.pkgsStable = import inputs.nixpkgs-stable {
-          inherit system;
-          config.allowUnfree = true;
-        };
+            pkgsStable = import inputs.nixpkgs-stable {
+              inherit system;
+              config.allowUnfree = true;
+            };
 
-        _module.args.pkgsUnstable = import inputs.nixpkgs-unstable {
-          inherit system;
-          config.allowunfree = true;
+            pkgsUnstable = import inputs.nixpkgs-unstable {
+              inherit system;
+              config.allowunfree = true;
+            };
+          };
         };
       };
 
       imports = [
-        inputs.git-hooks-nix.flakeModule
-        inputs.treefmt-nix.flakeModule
-        inputs.home-manager.flakeModules.home-manager
-
         ./lib/flake-module.nix
         ./checks/flake-module.nix
         ./formatter/flake-module.nix
@@ -106,6 +110,10 @@
         ./modules/flake-module.nix
         ./hosts/flake-module.nix
         ./homes/flake-module.nix
+
+        inputs.git-hooks-nix.flakeModule
+        inputs.treefmt-nix.flakeModule
+        inputs.home-manager.flakeModules.home-manager
       ];
     };
 }

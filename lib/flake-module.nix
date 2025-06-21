@@ -1,5 +1,5 @@
 {lib, ...}: {
   flake = {
-    lib = import ./default {inherit lib;};
+    lib = import ./lib.nix {inherit lib;};
   };
 }

@@ -6,5 +6,6 @@
     ./time
     ./nix
     ./update
+    ./fonts
   ];
 }

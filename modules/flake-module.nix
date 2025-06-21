@@ -1,12 +1,7 @@
 {
   flake = {
-    nixosModules = rec {
-      all = ./nixos;
-      default = all;
-    };
-    homeModules = rec {
-      all = ./home-manager;
-      default = all;
-    };
+    nixosModules.default = ./nixos;
+    homeModules.default = ./home-manager;
+    commonModules.default = ./common;
   };
 }

@@ -3,5 +3,6 @@
     ./zsh
     ./flatpak
     ./comma
+    ./niri
   ];
 }

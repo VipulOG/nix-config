@@ -8,11 +8,13 @@ with lib; let
 in {
   options.internal.programs.btop = {
     enable = mkEnableOption "btop";
+    package = mkPackageOption pkgs "btop" {};
   };
 
   config = mkIf cfg.enable {
     programs.btop = {
       enable = true;
+      inherit (cfg) package;
 
       settings = {
         vim_keys = true;

@@ -1,5 +1,5 @@
 {
   imports = [
-    ./senkai
+    ./niri
   ];
 }

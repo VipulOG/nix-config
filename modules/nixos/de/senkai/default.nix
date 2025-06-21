@@ -1,7 +1,0 @@
-{
-  imports = [
-    ./niri
-    ./fonts
-    ./swayosd
-  ];
-}

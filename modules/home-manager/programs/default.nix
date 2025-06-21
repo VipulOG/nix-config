@@ -19,5 +19,10 @@
     ./zellij
     ./neovim
     ./coreutils
+    ./wofi
+    ./nautilus
+    ./swaylock
+    ./niri
+    ./xwayland-satellite
   ];
 }

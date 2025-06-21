@@ -6,6 +6,7 @@
 }:
 with lib; let
   cfg = config.internal.programs.neovim;
+  colors = config.lib.stylix.colors.withHashtags;
 in {
   imports = [inputs.nvf.homeManagerModules.default];
 
@@ -215,8 +216,8 @@ in {
                     separator = nil,
                     draw_empty = false,
                     color = {
-                      fg = "${config.lib.stylix.colors.withHashtag.base05}",
-                      bg = "${config.lib.stylix.colors.withHashtag.base01}",
+                      fg = "${colors.base05}",
+                      bg = "${colors.base01}",
                     },
                   }
                 ''
@@ -232,8 +233,8 @@ in {
                     separator = nil,
                     draw_empty = false,
                     color = {
-                      fg = "${config.lib.stylix.colors.withHashtag.base0E}",
-                      bg = "${config.lib.stylix.colors.withHashtag.base01}",
+                      fg = "${colors.base0E}",
+                      bg = "${colors.base01}",
                     },
                     padding = {
                       left = 0,
@@ -252,8 +253,8 @@ in {
                     separator = nil,
                     draw_empty = false,
                     color = {
-                      fg = "${config.lib.stylix.colors.withHashtag.base03}",
-                      bg = "${config.lib.stylix.colors.withHashtag.base01}",
+                      fg = "${colors.base03}",
+                      bg = "${colors.base01}",
                     },
                     padding = {
                       left = 0,
@@ -296,8 +297,8 @@ in {
                     separator = nil,
                     draw_empty = false,
                     color = {
-                      fg = "${config.lib.stylix.colors.withHashtag.base04}",
-                      bg = "${config.lib.stylix.colors.withHashtag.base01}",
+                      fg = "${colors.base04}",
+                      bg = "${colors.base01}",
                     },
                     padding = {
                       left = 0,
@@ -315,8 +316,8 @@ in {
                     separator = nil,
                     draw_empty = false,
                     color = {
-                      fg = "${config.lib.stylix.colors.withHashtag.base03}",
-                      bg = "${config.lib.stylix.colors.withHashtag.base01}",
+                      fg = "${colors.base03}",
+                      bg = "${colors.base01}",
                     },
                     padding = {
                       left = 0,
@@ -342,8 +343,8 @@ in {
                     separator = nil,
                     draw_empty = false,
                     color = {
-                      fg = "${config.lib.stylix.colors.withHashtag.base04}",
-                      bg = "${config.lib.stylix.colors.withHashtag.base01}",
+                      fg = "${colors.base04}",
+                      bg = "${colors.base01}",
                     },
                     padding = {
                       left = 0,
@@ -369,8 +370,8 @@ in {
                     separator = nil,
                     draw_empty = false,
                     color = {
-                      fg = "${config.lib.stylix.colors.withHashtag.base03}",
-                      bg = "${config.lib.stylix.colors.withHashtag.base01}",
+                      fg = "${colors.base03}",
+                      bg = "${colors.base01}",
                     },
                     padding = {
                       left = 0,
@@ -388,8 +389,8 @@ in {
                     separator = nil,
                     draw_empty = false,
                     color = {
-                      fg = "${config.lib.stylix.colors.withHashtag.base04}",
-                      bg = "${config.lib.stylix.colors.withHashtag.base01}",
+                      fg = "${colors.base04}",
+                      bg = "${colors.base01}",
                     },
                     padding = {
                       left = 0,
@@ -405,8 +406,8 @@ in {
                     separator = nil,
                     draw_empty = false,
                     color = {
-                      fg = "${config.lib.stylix.colors.withHashtag.base04}",
-                      bg = "${config.lib.stylix.colors.withHashtag.base01}",
+                      fg = "${colors.base04}",
+                      bg = "${colors.base01}",
                     },
                     padding = {
                       left = 0,

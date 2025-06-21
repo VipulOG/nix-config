@@ -1,5 +1,5 @@
 {
   imports = [
-    ./pre-commit-check
+    ./pre-commit.nix
   ];
 }

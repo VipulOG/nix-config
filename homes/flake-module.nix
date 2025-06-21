@@ -21,8 +21,8 @@ with lib; let
           };
           modules = [
             self.homeModules.default
+            self.commonModules.default
             ./${system}/${home}
-            {programs.home-manager.enable = true;}
           ];
         }
       )

@@ -19,6 +19,7 @@ with lib; let
         };
         modules = [
           self.nixosModules.default
+          self.commonModules.default
           "${platformDirs.nixos}/${system}/${host}"
           {nixpkgs.pkgs = ctx.pkgs;}
         ];

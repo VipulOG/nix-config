@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   ...
 }:
@@ -8,6 +9,8 @@ with lib; let
 in {
   options.internal.programs.ghostty = {
     enable = mkEnableOption "ghostty";
+
+    package = lib.mkPackageOption pkgs "ghostty" {};
 
     enableZellijIntegration = mkOption {
       description = "Whether to enable zellij integration.";
@@ -18,6 +21,7 @@ in {
   config = mkIf cfg.enable {
     programs.ghostty = {
       enable = true;
+      inherit (cfg) package;
 
       settings =
         {
