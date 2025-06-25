@@ -29,26 +29,6 @@ with lib; let
     )
   );
 
-  # This function dynamically creates home-manager configurations for all
-  # detected systems and their respective homes.
-  makeHomeConfigurations = pipe getSystems [
-    # For each system architecture (e.g., "x86_64-linux", "aarch64-linux")...
-    (map (system: (pipe (getHomesForSystem system) [
-      # ...get all the home directories within that system (e.g., "vipul", "guest")...
-      (map (home: {
-        # ...and create a name for the configuration (e.g., "x86_64-linux/vipul")...
-        name = home;
-        # ...and define its value using the 'mkHomeConfig' function.
-        value = mkHomeConfig system home;
-      }))
-    ])))
-    # Flatten the list of lists into a single list of home configurations.
-    flatten
-    # Convert the list of { name, value } sets into a single attribute set,
-    # where each 'name' becomes an attribute key and 'value' its corresponding value.
-    listToAttrs
-  ];
-
   # Returns all system architectures available for our homes.
   # Example: getSystems might return ["x86_64-linux" "aarch64-linux"]
   # if those system directories exist
@@ -61,15 +41,25 @@ with lib; let
 
   # Returns all homes for a given system
   # Example: getHomesForSystem "x86_64-linux" might return ["vipul" "guest"]
-  # if those home directories exist
   getHomesForSystem = system: (
     pipe (builtins.readDir ./${system}) [
-      # Filter to only include directories (each directory = one home)
       (filterAttrs (_: type: type == "directory"))
-      # Extract just the directory names (home names)
       attrNames
     ]
   );
+
+  # This function dynamically creates home-manager configurations for all
+  # detected systems and their respective homes.
+  makeHomeConfigurations = pipe getSystems [
+    (map (system: (pipe (getHomesForSystem system) [
+      (map (home: {
+        name = home;
+        value = mkHomeConfig system home;
+      }))
+    ])))
+    flatten
+    listToAttrs
+  ];
 in {
   flake = {
     homeConfigurations = makeHomeConfigurations;
