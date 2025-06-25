@@ -12,7 +12,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     time = {
-      inherit (config.custom.vars) timeZone;
+      inherit (config.custom.common.constants) timeZone;
     };
   };
 }

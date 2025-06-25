@@ -24,7 +24,7 @@ in {
       {
         enable = true;
         image = config.lib.stylix.pixel "base03";
-        base16Scheme = config.internal.vars.colorscheme;
+        base16Scheme = config.custtom.constatns.colorscheme;
         polarity = "dark";
 
         cursor = {

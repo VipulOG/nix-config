@@ -1,13 +1,10 @@
 {lib, ...}: {
-  options.custom.vars = {
+  options.custom.common.constants = {
     timeZone = lib.mkOption {
       type = lib.types.str;
-      default = "UTC";
+      readOnly = true;
+      default = "Asia/Kolkata";
       description = "System timezone";
     };
-  };
-
-  config = {
-    custom.vars.timeZone = "Asia/Kolkata";
   };
 }
