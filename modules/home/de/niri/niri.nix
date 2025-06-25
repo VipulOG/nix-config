@@ -33,7 +33,7 @@ in {
 
       misc.stylix = {
         enable = true;
-        image = ./wallpaper.jpg;
+        extraConfig.image = ./wallpaper.jpg;
       };
     };
   };
