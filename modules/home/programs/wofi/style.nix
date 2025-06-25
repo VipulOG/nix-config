@@ -1,15 +1,8 @@
 {config, ...}: let
-  stylixColors = config.lib.stylix.colors.withHashtag or null;
-
-  baseColors = {
-    base00 = "";
-    base0D = "";
-  };
-
   colors =
-    if stylixColors != null
-    then stylixColors
-    else baseColors;
+    if builtins.hasAttr "withHashtags" config.lib.stylix.colors
+    then config.lib.stylix.colors.withHashtags
+    else config.custom.common.constants.colorscheme;
 in
   #css
   ''

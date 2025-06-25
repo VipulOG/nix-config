@@ -5,7 +5,11 @@
 }:
 with lib; let
   cfg = config.internal.services.mako;
-  colors = config.lib.stylix.colors.withHashtags;
+
+  colors =
+    if builtins.hasAttr "withHashtags" config.lib.stylix.colors
+    then config.lib.stylix.colors.withHashtags
+    else config.custom.common.constants.colorscheme;
 in {
   options.internal.services.mako = {
     enable = mkEnableOption "mako";
