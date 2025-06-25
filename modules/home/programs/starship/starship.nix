@@ -13,7 +13,7 @@ in {
   config = mkIf cfg.enable {
     programs.starship = {
       enable = true;
-      settings = importTOML ./config.toml;
+      settings = import ./config.nix;
     };
   };
 }
