@@ -69,36 +69,39 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable (
-    {
-      services.swayidle = {
-        enable = true;
-        inherit (cfg) package;
+  config = lib.mkIf cfg.enable {
+    services.swayidle = lib.mkMerge [
+      (
+        lib.mkDefault {
+          enable = true;
+          inherit (cfg) package;
 
-        timeouts = [
-          {
-            timeout = cfg.lockTimeout;
-            command = cfg.lockCommand;
-          }
-          {
-            timeout = cfg.monitorsOffTimeout;
-            command = cfg.monitorsOffCommand;
-            resumeCommand = cfg.monitorsOnCommand;
-          }
-          {
-            timeout = cfg.suspendTimeout;
-            command = "${lib.getExe' pkgs.systemd "systemctl"} suspend";
-          }
-        ];
+          timeouts = [
+            {
+              timeout = cfg.lockTimeout;
+              command = cfg.lockCommand;
+            }
+            {
+              timeout = cfg.monitorsOffTimeout;
+              command = cfg.monitorsOffCommand;
+              resumeCommand = cfg.monitorsOnCommand;
+            }
+            {
+              timeout = cfg.suspendTimeout;
+              command = "${lib.getExe' pkgs.systemd "systemctl"} suspend";
+            }
+          ];
 
-        events = [
-          {
-            event = "before-sleep";
-            command = cfg.preSleepLockCommand;
-          }
-        ];
-      };
-    }
-    # // cfg.extraConfig
-  );
+          events = [
+            {
+              event = "before-sleep";
+              command = cfg.preSleepLockCommand;
+            }
+          ];
+        }
+      )
+
+      (lib.removeAttrs cfg.extraConfig ["enable"])
+    ];
+  };
 }
