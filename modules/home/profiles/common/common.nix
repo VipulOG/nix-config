@@ -1,17 +1,17 @@
 {
   config,
   lib,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.profiles.common;
+}: let
+  cfg = config.custom.profiles.common;
 in {
-  options.internal.profiles.common = {
-    enable = mkEnableOption "common profile";
+  options.custom.profiles.common = {
+    enable = self.lib.mkCustomEnableOption "common profile";
   };
 
-  config = mkIf cfg.enable {
-    internal = {
+  config = lib.mkIf cfg.enable {
+    custom = {
       programs = {
         zsh.enable = true;
         git.enable = true;

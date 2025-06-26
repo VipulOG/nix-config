@@ -1,17 +1,17 @@
 {
   config,
   lib,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.profiles.development;
+}: let
+  cfg = config.custom.profiles.development;
 in {
-  options.internal.profiles.development = {
-    enable = mkEnableOption "development profile";
+  options.custom.profiles.development = {
+    enable = self.lib.mkCustomEnableOption "development profile";
   };
 
-  config = mkIf cfg.enable {
-    internal = {
+  config = lib.mkIf cfg.enable {
+    custom = {
       programs = {
         git.enable = true;
         lazygit.enable = true;

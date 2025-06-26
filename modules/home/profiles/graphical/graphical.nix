@@ -1,17 +1,17 @@
 {
   config,
   lib,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.profiles.graphical;
+}: let
+  cfg = config.custom.profiles.graphical;
 in {
-  options.internal.profiles.graphical = {
-    enable = mkEnableOption "graphical profile";
+  options.custom.profiles.graphical = {
+    enable = self.lib.mkCustomEnableOption "graphical profile";
   };
 
-  config = mkIf cfg.enable {
-    internal = {
+  config = lib.mkIf cfg.enable {
+    custom = {
       programs = {
         ghostty.enable = true;
         zen-browser.enable = true;
