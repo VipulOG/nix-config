@@ -4,7 +4,7 @@
   lib,
   self,
   ...
-}: let
+} @ args: let
   cfg = config.custom.programs.zsh;
 in {
   options.custom.programs.zsh = {
@@ -29,9 +29,7 @@ in {
         }
       ];
 
-      initContent = lib.concatStringsSep "\n" [
-        (lib.readFile ./init-scripts/prompt.zsh)
-      ];
+      initContent = import ./init-scripts args;
     };
   };
 }
