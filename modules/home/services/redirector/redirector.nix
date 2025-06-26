@@ -18,7 +18,7 @@ in {
   config = lib.mkIf cfg.enable {
     services.redirector = {
       enable = true;
-      package = cfg.package;
+      inherit (cfg) package;
       settings = {
         default_search = "https://duckduckgo.com/?q={}";
         search_suggestions = "https://search.brave.com/api/suggest?q={}";

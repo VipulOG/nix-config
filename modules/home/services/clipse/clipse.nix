@@ -14,6 +14,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     services.clipse = {
+      inherit (cfg) package;
       enable = true;
       historySize = 100;
       allowDuplicates = false;

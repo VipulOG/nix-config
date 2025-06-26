@@ -17,6 +17,7 @@ in {
   config = lib.mkIf cfg.enable {
     services.mako = {
       enable = true;
+      inherit (cfg) package;
       settings = {
         font = lib.mkForce "monospace 12";
         margin = "4";
