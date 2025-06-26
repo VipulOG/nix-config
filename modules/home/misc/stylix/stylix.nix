@@ -26,14 +26,9 @@ in {
         lib.mkDefault {
           enable = true;
           image = config.lib.stylix.pixel "base03";
-          base16Scheme = config.custom.common.constants.colorSchemeYaml;
+          base16Scheme = config.custom.common.vars.colorScheme.yaml;
           polarity = "dark";
-
-          cursor = {
-            package = pkgs.simp1e-cursors;
-            name = "Simp1e";
-            size = 32;
-          };
+          inherit (config.custom.common.vars) cursor;
 
           fonts = {
             emoji = {

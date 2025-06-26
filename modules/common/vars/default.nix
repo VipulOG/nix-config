@@ -1,6 +1,7 @@
 {
   imports = [
-    ./timezone.nix
+    ./time.nix
     ./colorscheme.nix
+    ./cursor.nix
   ];
 }

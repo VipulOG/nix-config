@@ -2,12 +2,12 @@
   colors =
     if config.custom.misc.stylix.enable
     then config.lib.stylix.colors.withHashtag
-    else config.custom.common.constants.colorScheme.withHashtag;
+    else config.custom.common.vars.colorScheme.scheme.withHashtag;
 
-  cursor = {
-    name = config.stylix.cursor.name or null;
-    size = toString config.stylix.cursor.size or null;
-  };
+  cursor =
+    if config.custom.misc.stylix.enable
+    then {inherit (config.stylix.cursor) name size;}
+    else {inherit (config.custom.common.vars.cursor) name size;};
 in
   #kdl
   ''
@@ -57,6 +57,6 @@ in
 
     cursor {
       xcursor-theme "${cursor.name}"
-      xcursor-size ${cursor.size}
+      xcursor-size ${toString cursor.size}
     }
   ''

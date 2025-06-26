@@ -2,7 +2,7 @@
   colors =
     if config.custom.misc.stylix.enable
     then config.lib.stylix.colors.withHashtag
-    else config.custom.common.constants.colorScheme.withHashtag;
+    else config.custom.common.vars.colorScheme.scheme.withHashtag;
 in
   #css
   ''

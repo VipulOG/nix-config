@@ -4,12 +4,12 @@
   ...
 }: let
   pluginPath = "file://${inputs'.zjstatus.packages.default}/bin/zjstatus.wasm";
-  inherit (config.custom.common.constants) timeZone;
+  inherit (config.custom.common.vars.time) timeZone;
 
   colors =
     if config.custom.misc.stylix.enable
     then config.lib.stylix.colors.withHashtag
-    else config.custom.common.constants.colorScheme.withHashtag;
+    else config.custom.common.vars.colorScheme.sheme.withHashtag;
 in
   # kdl
   ''
