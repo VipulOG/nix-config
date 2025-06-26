@@ -8,9 +8,9 @@ with lib; let
   cfg = config.internal.programs.neovim;
 
   colors =
-    if builtins.hasAttr "withHashtags" config.lib.stylix.colors
-    then config.lib.stylix.colors.withHashtags
-    else config.custom.common.constants.colorscheme;
+    if builtins.hasAttr "withHashtag" config.lib.stylix.colors
+    then config.lib.stylix.colors.withHashtag
+    else config.custom.common.constants.colorScheme.withHashtag;
 in {
   imports = [inputs.nvf.homeManagerModules.default];
 

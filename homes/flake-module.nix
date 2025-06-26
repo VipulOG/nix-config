@@ -16,7 +16,7 @@ with lib; let
         inputs.home-manager.lib.homeManagerConfiguration {
           inherit (ctx) pkgs;
           extraSpecialArgs = {
-            inherit (ctx) inputs' self' pkgsStable pkgsUnstable;
+            inherit (ctx) inputs' self' pkgs pkgsStable pkgsUnstable;
             inherit inputs system home self;
           };
           modules = [

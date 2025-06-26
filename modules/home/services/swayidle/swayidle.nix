@@ -6,7 +6,7 @@
 }:
 with lib; let
   cfg = config.internal.services.swayidle;
-  defaultSwaylockPkg = config.internal.programs.swaylock.package ? pkgs.swaylock-effects;
+  defaultSwaylockPkg = lib.attrByPath ["internal" "programs" "swaylock" "package"] pkgs.swaylock-effects config;
 in {
   options.internal.services.swayidle = {
     enable = mkEnableOption "Enable swayidle integration.";
@@ -26,13 +26,13 @@ in {
 
     lockCommand = mkOption {
       type = types.str;
-      default = "${lib.getExe' swaylockPackage "swaylock"} -fF --grace 10 --fade-in 4";
+      default = "${lib.getExe' cfg.swaylockPackage "swaylock"} -fF --grace 10 --fade-in 4";
       description = "Command to execute to lock the monitors.";
     };
 
     preSleepLockCommand = mkOption {
       type = types.str;
-      default = "${lib.getExe' swaylockPackage "swaylock"} -fF";
+      default = "${lib.getExe' cfg.swaylockPackage "swaylock"} -fF";
       description = "Command to run just before the system goes to sleep (e.g., to lock the monitors).";
     };
 

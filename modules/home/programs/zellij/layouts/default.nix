@@ -4,12 +4,12 @@
   ...
 }: let
   pluginPath = "file://${inputs'.zjstatus.packages.default}/bin/zjstatus.wasm";
-  inherit (config.internal.vars) timezone;
+  inherit (config.custom.common.constants) timeZone;
 
   colors =
-    if builtins.hasAttr "withHashtags" config.lib.stylix.colors
-    then config.lib.stylix.colors.withHashtags
-    else config.custom.common.constants.colorscheme;
+    if builtins.hasAttr "withHashtag" config.lib.stylix.colors
+    then config.lib.stylix.colors.withHashtag
+    else config.custom.common.constants.colorScheme.withHashtag;
 in
   # kdl
   ''
@@ -42,7 +42,7 @@ in
           tab_floating_indicator "󰉈 "
           datetime "#[fg=${colors.base04},bg=${colors.base01}] {format} "
           datetime_format "%A, %d %b %Y %H:%M"
-          datetime_timezone "${timezone}"
+          datetime_timezone "${timeZone}"
           border_enabled "false"
           border_char "‾"
           border_format "#[fg=${colors.base02}]"

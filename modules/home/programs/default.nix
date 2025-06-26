@@ -23,6 +23,7 @@
     ./nautilus
     ./swaylock
     ./niri
+    ./wl-clipboard
     ./xwayland-satellite
   ];
 }

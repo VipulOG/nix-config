@@ -1,8 +1,9 @@
 {
   config = {
     internal = {
+      users.vipul.enable = true;
+
       profiles = {
-        common.enable = true;
         development.enable = true;
         graphical.enable = true;
       };
