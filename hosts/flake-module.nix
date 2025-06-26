@@ -67,7 +67,7 @@ with lib; let
   # Example: getSystemsForPlatform "nixos" might return ["x86_64-linux" "aarch64-linux"]
   # if those system directories exist
   getSystemsForPlatform = platformName:
-    pipe (builtins.readDir (platformDirs.${platformName})) [
+    pipe (builtins.readDir platformDirs.${platformName}) [
       # Filter to only include directories (each directory = one host)
       (filterAttrs (_: type: type == "directory"))
       # Extract just the directory names (host names)

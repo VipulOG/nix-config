@@ -33,10 +33,7 @@ in {
   config = lib.mkIf cfg.enable {
     programs.git = {
       enable = true;
-      inherit (cfg) package;
-
-      userName = cfg.userName;
-      userEmail = cfg.userEmail;
+      inherit (cfg) package userName userEmail;
 
       extraConfig = lib.mkMerge [
         {

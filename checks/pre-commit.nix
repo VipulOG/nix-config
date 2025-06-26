@@ -1,4 +1,4 @@
-{...}: {
+{
   perSystem = {inputs', ...}: {
     pre-commit.settings = {
       default_stages = ["pre-commit"];

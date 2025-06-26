@@ -1,6 +1,6 @@
 {device ? "/dev/sda", ...}: {
   disk.main = {
-    device = device;
+    inherit device;
     type = "disk";
     content = {
       type = "gpt";
