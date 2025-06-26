@@ -2,17 +2,17 @@
   lib,
   pkgs,
   config,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.services.swayosd;
+}: let
+  cfg = config.custom.services.swayosd;
 in {
-  options.internal.services.swayosd = {
-    enable = mkEnableOption "swayosd";
+  options.custom.services.swayosd = {
+    enable = self.lib.mkCustomEnableOption "swayosd";
     package = lib.mkPackageOption pkgs "swayosd" {};
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     services.swayosd = {
       enable = true;
       inherit (cfg) package;

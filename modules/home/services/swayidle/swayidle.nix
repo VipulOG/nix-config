@@ -2,72 +2,76 @@
   config,
   pkgs,
   lib,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.services.swayidle;
-  defaultSwaylockPkg = lib.attrByPath ["internal" "programs" "swaylock" "package"] pkgs.swaylock-effects config;
+}: let
+  cfg = config.custom.services.swayidle;
+
+  defaultSwaylockPkg =
+    if config.custom.programs.swaylock.enable
+    then config.custom.programs.swaylock.package
+    else pkgs.swaylock-effects;
 in {
-  options.internal.services.swayidle = {
-    enable = mkEnableOption "Enable swayidle integration.";
+  options.custom.services.swayidle = {
+    enable = self.lib.mkCustomEnableOption "Enable swayidle integration.";
     package = lib.mkPackageOption pkgs "swayidle" {};
 
-    swaylockPackage = mkOption {
-      type = types.package;
+    swaylockPackage = lib.mkOption {
+      type = lib.types.package;
       default = defaultSwaylockPkg;
       description = "The package to use for swalock.";
     };
 
-    lockTimeout = mkOption {
-      type = types.int;
+    lockTimeout = lib.mkOption {
+      type = lib.types.int;
       default = 60;
       description = "Time (in seconds) of inactivity before locking the monitors.";
     };
 
-    lockCommand = mkOption {
-      type = types.str;
+    lockCommand = lib.mkOption {
+      type = lib.types.str;
       default = "${lib.getExe' cfg.swaylockPackage "swaylock"} -fF --grace 10 --fade-in 4";
       description = "Command to execute to lock the monitors.";
     };
 
-    preSleepLockCommand = mkOption {
-      type = types.str;
+    preSleepLockCommand = lib.mkOption {
+      type = lib.types.str;
       default = "${lib.getExe' cfg.swaylockPackage "swaylock"} -fF";
       description = "Command to run just before the system goes to sleep (e.g., to lock the monitors).";
     };
 
-    monitorsOffTimeout = mkOption {
-      type = types.int;
+    monitorsOffTimeout = lib.mkOption {
+      type = lib.types.int;
       default = 65;
       description = "Time (in seconds) of inactivity before turning off the monitors.";
     };
 
-    monitorsOffCommand = mkOption {
-      type = types.str;
+    monitorsOffCommand = lib.mkOption {
+      type = lib.types.str;
       description = "Command to execute to turn off the monitors.";
     };
 
-    monitorsOnCommand = mkOption {
-      type = types.str;
+    monitorsOnCommand = lib.mkOption {
+      type = lib.types.str;
       description = "Command to execute to turn the monitors back on when resuming.";
     };
 
-    suspendTimeout = mkOption {
-      type = types.int;
+    suspendTimeout = lib.mkOption {
+      type = lib.types.int;
       default = 80;
       description = "Time (in seconds) of inactivity before suspending the system.";
     };
 
-    extraConfig = mkOption {
-      type = types.attrsOf types.anything;
+    extraConfig = lib.mkOption {
+      type = lib.types.attrsOf lib.types.anything;
       description = "Additional swayidle configuration options.";
       default = {};
     };
   };
 
-  config = mkIf cfg.enable {
-    services.swayidle =
-      {
+  config = lib.mkIf cfg.enable (
+    {
+      services.swayidle = {
         enable = true;
         inherit (cfg) package;
 
@@ -93,7 +97,8 @@ in {
             command = cfg.preSleepLockCommand;
           }
         ];
-      }
-      // cfg.extraConfig;
-  };
+      };
+    }
+    // cfg.extraConfig
+  );
 }

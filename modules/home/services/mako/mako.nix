@@ -1,29 +1,29 @@
 {
   config,
   lib,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.services.mako;
+}: let
+  cfg = config.custom.services.mako;
 
   colors =
-    if builtins.hasAttr "withHashtag" config.lib.stylix.colors
+    if builtins.hasAttr "stylix" config.lib
     then config.lib.stylix.colors.withHashtag
     else config.custom.common.constants.colorScheme.withHashtag;
 in {
-  options.internal.services.mako = {
-    enable = mkEnableOption "mako";
+  options.custom.services.mako = {
+    enable = self.lib.mkCustomEnableOption "mako";
   };
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     services.mako = {
       enable = true;
       settings = {
-        font = mkForce "monospace 12";
+        font = lib.mkForce "monospace 12";
         margin = "4";
         outer-margin = "0";
         padding = "8";
         width = "320";
-        border-color = mkForce colors.base03;
+        border-color = lib.mkForce colors.base03;
         border-size = 3;
       };
     };

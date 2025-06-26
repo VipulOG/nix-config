@@ -1,17 +1,18 @@
 {
   config,
   lib,
+  pkgs,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.services.clipse;
+}: let
+  cfg = config.custom.services.clipse;
 in {
-  options.internal.services.clipse = {
-    enable = mkEnableOption "clipse";
+  options.custom.services.clipse = {
+    enable = self.lib.mkCustomEnableOption "clipse";
     package = lib.mkPackageOption pkgs "clipse" {};
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     services.clipse = {
       enable = true;
       historySize = 100;
