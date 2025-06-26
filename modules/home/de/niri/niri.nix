@@ -2,17 +2,17 @@
   config,
   pkgs,
   lib,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.de.niri;
+}: let
+  cfg = config.custom.de.niri;
 in {
-  options.internal.de.niri = {
-    enable = mkEnableOption "niri de";
+  options.custom.de.niri = {
+    enable = self.lib.mkCustomEnableOption "niri de";
   };
 
-  config = mkIf cfg.enable {
-    internal = {
+  config = lib.mkIf cfg.enable {
+    custom = {
       programs = {
         niri.enable = true;
         wofi.enable = true;
