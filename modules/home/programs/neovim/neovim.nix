@@ -8,7 +8,7 @@
   cfg = config.custom.programs.neovim;
 
   colors =
-    if builtins.hasAttr "stylix" config.lib
+    if config.custom.misc.stylix.enable
     then config.lib.stylix.colors.withHashtag
     else config.custom.common.constants.colorScheme.withHashtag;
 in {

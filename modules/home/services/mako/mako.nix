@@ -7,7 +7,7 @@
   cfg = config.custom.services.mako;
 
   colors =
-    if builtins.hasAttr "stylix" config.lib
+    if config.custom.misc.stylix.enable
     then config.lib.stylix.colors.withHashtag
     else config.custom.common.constants.colorScheme.withHashtag;
 in {
