@@ -1,12 +1,13 @@
 {
   config,
   lib,
+  self,
   ...
 }: let
-  cfg = config.internal.users.vipul;
+  cfg = config.custom.users.vipul;
 in {
-  options.internal.users.vipul = {
-    enable = lib.mkEnableOption "user \"vipul\"";
+  options.custom.users.vipul = {
+    enable = self.lib.mkCustomEnableOption "user \"vipul\"";
   };
 
   config = lib.mkIf cfg.enable {
@@ -15,7 +16,7 @@ in {
       homeDirectory = "/home/vipul";
     };
 
-    internal = {
+    custom = {
       profiles = {
         common.enable = true;
       };
