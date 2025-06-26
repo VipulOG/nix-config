@@ -3,26 +3,26 @@
   inputs,
   lib,
   config,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.misc.stylix;
+}: let
+  cfg = config.custom.misc.stylix;
 in {
   imports = [inputs.stylix.homeModules.stylix];
 
-  options.internal.misc.stylix = {
-    enable = mkEnableOption "stylix";
+  options.custom.misc.stylix = {
+    enable = self.lib.mkCustomEnableOption "stylix";
 
-    extraConfig = mkOption {
-      type = types.attrsOf types.anything;
+    extraConfig = lib.mkOption {
+      type = lib.types.attrsOf lib.types.anything;
       description = "Additional stylix configuration options.";
       default = {};
     };
   };
 
-  config = mkIf cfg.enable {
-    stylix =
-      {
+  config = lib.mkIf cfg.enable (
+    {
+      stylix = {
         enable = true;
         image = config.lib.stylix.pixel "base03";
         base16Scheme = config.custom.common.constants.colorSchemeYaml;
@@ -79,7 +79,8 @@ in {
           popups = 1.0;
           terminal = 1.0;
         };
-      }
-      // removeAttrs cfg.extraConfig ["enable"];
-  };
+      };
+    }
+    // lib.removeAttrs cfg.extraConfig ["enable"]
+  );
 }
