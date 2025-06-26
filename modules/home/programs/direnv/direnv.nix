@@ -1,16 +1,18 @@
 {
   config,
   lib,
+  pkgs,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.direnv;
+}: let
+  cfg = config.custom.programs.direnv;
 in {
-  options.internal.programs.direnv = {
-    enable = mkEnableOption "direnv";
+  options.custom.programs.direnv = {
+    enable = self.lib.mkCustomEnableOption "direnv";
+    package = lib.mkPackageOption pkgs "direnv" {};
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.direnv = {
       enable = true;
       nix-direnv.enable = true;

@@ -81,6 +81,6 @@ in {
         };
       };
     }
-    // lib.removeAttrs cfg.extraConfig ["enable"]
+    # // lib.removeAttrs cfg.extraConfig ["enable"]
   );
 }

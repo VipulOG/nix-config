@@ -1,16 +1,18 @@
 {
   config,
   lib,
+  pkgs,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.zoxide;
+}: let
+  cfg = config.custom.programs.zoxide;
 in {
-  options.internal.programs.zoxide = {
-    enable = mkEnableOption "zoxide";
+  options.custom.programs.zoxide = {
+    enable = self.lib.mkCustomEnableOption "zoxide";
+    package = lib.mkPackageOption pkgs "zoxide";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.zoxide = {
       enable = true;
     };

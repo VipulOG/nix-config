@@ -2,16 +2,17 @@
   config,
   lib,
   pkgs,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.lazygit;
+}: let
+  cfg = config.custom.programs.lazygit;
 in {
-  options.internal.programs.lazygit = {
-    enable = mkEnableOption "lazygit";
+  options.custom.programs.lazygit = {
+    enable = self.lib.mkCustomEnableOption "lazygit";
+    package = lib.mkPackageOption pkgs "lazygit" {};
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.lazygit = {
       enable = true;
 
@@ -29,7 +30,7 @@ in {
 
         git = {
           paging = {
-            pager = "${getExe pkgs.delta} --dark --paging=never";
+            pager = "${lib.getExe pkgs.delta} --dark --paging=never";
           };
         };
       };

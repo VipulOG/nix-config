@@ -1,6 +1,6 @@
 {
   config = {
-    internal = {
+    custom = {
       users.vipul.enable = true;
 
       profiles = {

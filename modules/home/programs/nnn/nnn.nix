@@ -1,16 +1,18 @@
 {
   config,
   lib,
+  pkgs,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.nnn;
+}: let
+  cfg = config.custom.programs.nnn;
 in {
-  options.internal.programs.nnn = {
-    enable = mkEnableOption "nnn";
+  options.custom.programs.nnn = {
+    enable = self.lib.mkCustomEnableOption "nnn";
+    package = lib.mkPackageOption pkgs "nnn" {};
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.nnn = {
       enable = true;
     };

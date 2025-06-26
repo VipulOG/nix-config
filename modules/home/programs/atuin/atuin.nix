@@ -1,16 +1,18 @@
 {
   config,
   lib,
+  pkgs,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.atuin;
+}: let
+  cfg = config.custom.programs.atuin;
 in {
-  options.internal.programs.atuin = {
-    enable = mkEnableOption "atuin";
+  options.custom.programs.atuin = {
+    enable = self.lib.mkCustomEnableOption "atuin";
+    package = lib.mkPackageOption pkgs "atuin" {};
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.atuin = {
       enable = true;
       daemon.enable = true;

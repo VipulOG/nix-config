@@ -2,22 +2,22 @@
   inputs',
   config,
   lib,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.zen-browser;
+}: let
+  cfg = config.custom.programs.zen-browser;
 in {
-  options.internal.programs.zen-browser = {
-    enable = mkEnableOption "zen-browser";
+  options.custom.programs.zen-browser = {
+    enable = self.lib.mkCustomEnableOption "zen-browser";
 
-    package = mkOption {
-      type = types.package;
+    package = lib.mkOption {
+      type = lib.types.package;
       inherit (inputs'.zen-browser.packages) default;
       description = "The package to use for zen-browser.";
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     home.packages = [
       cfg.package
     ];

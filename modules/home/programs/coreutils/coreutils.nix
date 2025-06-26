@@ -2,18 +2,19 @@
   config,
   lib,
   pkgs,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.coreutils;
+}: let
+  cfg = config.custom.programs.coreutils;
 in {
-  options.internal.programs.coreutils = {
-    enable = mkEnableOption "coreutils";
+  options.custom.programs.coreutils = {
+    enable = self.lib.mkCustomEnableOption "coreutils";
+    package = lib.mkPackageOption pkgs "coreutils" {};
   };
 
-  config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      coreutils # basic gnu utils
+  config = lib.mkIf cfg.enable {
+    home.packages = [
+      cfg.package
     ];
   };
 }

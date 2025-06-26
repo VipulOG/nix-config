@@ -1,16 +1,18 @@
 {
   config,
   lib,
+  pkgs,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.qutebrowser;
+}: let
+  cfg = config.custom.programs.qutebrowser;
 in {
-  options.internal.programs.qutebrowser = {
-    enable = mkEnableOption "qutebrowser";
+  options.custom.programs.qutebrowser = {
+    enable = self.lib.mkCustomEnableOption "qutebrowser";
+    package = lib.mkPackageOption pkgs "qutebrowser" {};
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.qutebrowser = {
       enable = true;
       settings = {

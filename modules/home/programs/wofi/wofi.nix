@@ -1,16 +1,18 @@
 {
   config,
   lib,
+  pkgs,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.wofi;
+}: let
+  cfg = config.custom.programs.wofi;
 in {
-  options.internal.programs.wofi = {
-    enable = mkEnableOption "wofi";
+  options.custom.programs.wofi = {
+    enable = self.lib.mkCustomEnableOption "wofi";
+    package = lib.mkPackageOption pkgs "wofi";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.wofi = {
       enable = true;
       style = import ./style.nix {inherit config;};

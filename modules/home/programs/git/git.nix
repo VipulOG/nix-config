@@ -2,41 +2,42 @@
   config,
   lib,
   pkgs,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.git;
+}: let
+  cfg = config.custom.programs.git;
 in {
-  options.internal.programs.git = {
-    enable = mkEnableOption "git";
+  options.custom.programs.git = {
+    enable = self.lib.mkCustomEnableOption "git";
+    package = lib.mkPackageOption pkgs "git" {};
 
-    userName = mkOption {
-      type = types.str;
+    userName = lib.mkOption {
+      type = lib.types.str;
       default = "VipulOG";
       description = "The username to use for Git commits.";
     };
 
-    userEmail = mkOption {
-      type = types.str;
+    userEmail = lib.mkOption {
+      type = lib.types.str;
       default = "90324465+VipulOG@users.noreply.github.com";
       description = "The email to use for Git commits.";
     };
 
-    extraConfig = mkOption {
-      type = types.attrsOf types.anything;
+    extraConfig = lib.mkOption {
+      type = lib.types.attrsOf lib.types.anything;
       default = {};
       description = "Additional Git configuration options.";
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.git = {
       enable = true;
 
       userName = cfg.userName;
       userEmail = cfg.userEmail;
 
-      extraConfig = mkMerge [
+      extraConfig = lib.mkMerge [
         {
           init.defaultBranch = "main";
           trim.bases = "develop,master,main"; # for git-trim

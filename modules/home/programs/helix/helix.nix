@@ -1,16 +1,18 @@
 {
   config,
   lib,
+  pkgs,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.helix;
+}: let
+  cfg = config.custom.programs.helix;
 in {
-  options.internal.programs.helix = {
-    enable = mkEnableOption "helix";
+  options.custom.programs.helix = {
+    enable = self.lib.mkCustomEnableOption "helix";
+    package = lib.mkPackageOption pkgs "helix" {};
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.helix = {
       enable = true;
       defaultEditor = true;

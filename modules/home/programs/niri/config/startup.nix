@@ -16,7 +16,7 @@
     btop = getExe' pkgs.btop "btop";
     ghostty = getExe' pkgs.ghostty "ghostty";
     swaybg = getExe' pkgs.swaybg "swaybg";
-    whatsappWeb = config.internal.programs.whatsapp-web.package;
+    whatsappWeb = config.custom.programs.whatsapp-web.package;
     xwaylandSatellite = getExe' pkgs.xwayland-satellite "xwayland-satellite";
     zenBrowser = getExe' inputs'.zen-browser.packages.default "zen-browser";
   };

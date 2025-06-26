@@ -2,22 +2,17 @@
   config,
   lib,
   pkgs,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.swaylock;
+}: let
+  cfg = config.custom.programs.swaylock;
 in {
-  options.internal.programs.swaylock = {
-    enable = mkEnableOption "swaylock";
-
-    package = mkOption {
-      type = types.package;
-      default = pkgs.swaylock-effects;
-      description = "The package to use for swaylock.";
-    };
+  options.custom.programs.swaylock = {
+    enable = self.lib.mkCustomEnableOption "swaylock";
+    package = lib.mkPackageOption pkgs "swaylock-effects" {};
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.swaylock = {
       enable = true;
       inherit (cfg) package;

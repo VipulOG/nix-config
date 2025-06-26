@@ -2,18 +2,19 @@
   config,
   lib,
   pkgs,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.android-studio;
+}: let
+  cfg = config.custom.programs.android-studio;
 in {
-  options.internal.programs.android-studio = {
-    enable = mkEnableOption "android-studio";
+  options.custom.programs.android-studio = {
+    enable = self.lib.mkCustomEnableOption "android-studio";
+    package = lib.mkPackageOption pkgs.androidStudioPackages "dev" {};
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     home.packages = [
-      pkgs.androidStudioPackages.dev
+      cfg.package
     ];
   };
 }

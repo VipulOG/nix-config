@@ -2,17 +2,18 @@
   config,
   lib,
   pkgs,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.nautilus;
+}: let
+  cfg = config.custom.programs.nautilus;
 in {
-  options.internal.programs.nautilus = {
-    enable = mkEnableOption "nautilus";
+  options.custom.programs.nautilus = {
+    enable = self.lib.mkCustomEnableOption "nautilus";
+    package = lib.mkPackageOption pkgs "nautilus" {};
   };
-  config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      nautilus
+  config = lib.mkIf cfg.enable {
+    home.packages = [
+      cfg.package
     ];
   };
 }

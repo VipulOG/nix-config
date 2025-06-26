@@ -2,19 +2,21 @@
   lib,
   config,
   inputs,
+  self,
+  pkgs,
   ...
-} @ args:
-with lib; let
-  cfg = config.internal.programs.niri;
+} @ args: let
+  cfg = config.custom.programs.niri;
 in {
   imports = [inputs.niri.homeModules.niri];
 
-  options.internal.programs.niri = {
-    enable = mkEnableOption "niri";
+  options.custom.programs.niri = {
+    enable = self.lib.mkCustomEnableOption "niri";
+    package = lib.mkPackageOption pkgs "niri-unstable" {};
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     nixpkgs.overlays = [inputs.niri.overlays.niri];
-    programs.niri.config = import ./config/config.nix args;
+    programs.niri.config = import ./config args;
   };
 }

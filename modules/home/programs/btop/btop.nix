@@ -2,17 +2,17 @@
   config,
   pkgs,
   lib,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.btop;
+}: let
+  cfg = config.custom.programs.btop;
 in {
-  options.internal.programs.btop = {
-    enable = mkEnableOption "btop";
-    package = mkPackageOption pkgs "btop" {};
+  options.custom.programs.btop = {
+    enable = self.lib.mkCustomEnableOption "btop";
+    package = lib.mkPackageOption pkgs "btop" {};
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.btop = {
       enable = true;
       inherit (cfg) package;

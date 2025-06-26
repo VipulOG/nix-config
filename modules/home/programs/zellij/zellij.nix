@@ -2,16 +2,18 @@
   lib,
   config,
   inputs',
+  pkgs,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.zellij;
+}: let
+  cfg = config.custom.programs.zellij;
 in {
-  options.internal.programs.zellij = {
-    enable = mkEnableOption "zellij";
+  options.custom.programs.zellij = {
+    enable = self.lib.mkCustomEnableOption "zellij";
+    package = lib.mkPackageOption pkgs "zellij";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.zellij = {
       enable = true;
       settings = {

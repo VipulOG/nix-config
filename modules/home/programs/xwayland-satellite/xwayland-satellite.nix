@@ -2,16 +2,16 @@
   config,
   lib,
   pkgs,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.xwayland-satellite;
+}: let
+  cfg = config.custom.programs.xwayland-satellite;
 in {
-  options.internal.programs.xwayland-satellite = {
-    enable = mkEnableOption "xwayland-satellite";
-    package = mkPackageOption pkgs "xwayland-satellite" {};
+  options.custom.programs.xwayland-satellite = {
+    enable = self.lib.mkCustomEnableOption "xwayland-satellite";
+    package = lib.mkPackageOption pkgs "xwayland-satellite" {};
   };
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     home.packages = [
       cfg.package
     ];

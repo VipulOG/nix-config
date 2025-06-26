@@ -1,6 +1,6 @@
 {config, ...}: let
   colors =
-    if builtins.hasAttr "withHashtag" config.lib.stylix.colors
+    if builtins.hasAttr "stylix" config.lib
     then config.lib.stylix.colors.withHashtag
     else config.custom.common.constants.colorScheme.withHashtag;
 

@@ -2,16 +2,17 @@
   pkgs,
   config,
   lib,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.zsh;
+}: let
+  cfg = config.custom.programs.zsh;
 in {
-  options.internal.programs.zsh = {
-    enable = mkEnableOption "zsh";
+  options.custom.programs.zsh = {
+    enable = self.lib.mkCustomEnableOption "zsh";
+    package = lib.mkPackageOption pkgs "zsh";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.zsh = {
       enable = true;
 
@@ -27,8 +28,8 @@ in {
         }
       ];
 
-      initContent = concatStringsSep "\n" [
-        (readFile ./init-scripts/prompt.zsh)
+      initContent = lib.concatStringsSep "\n" [
+        (lib.readFile ./init-scripts/prompt.zsh)
       ];
     };
   };

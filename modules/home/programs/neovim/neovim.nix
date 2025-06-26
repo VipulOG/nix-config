@@ -2,29 +2,29 @@
   inputs,
   lib,
   config,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.neovim;
+}: let
+  cfg = config.custom.programs.neovim;
 
   colors =
-    if builtins.hasAttr "withHashtag" config.lib.stylix.colors
+    if builtins.hasAttr "stylix" config.lib
     then config.lib.stylix.colors.withHashtag
     else config.custom.common.constants.colorScheme.withHashtag;
 in {
   imports = [inputs.nvf.homeManagerModules.default];
 
-  options.internal.programs.neovim = {
-    enable = mkEnableOption "neovim";
+  options.custom.programs.neovim = {
+    enable = self.lib.mkCustomEnableOption "neovim";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     home.sessionVariables = {
       VISUAL = "nvim";
       EDITOR = "nvim";
     };
 
-    programs.nvf = with lib.generators; {
+    programs.nvf = {
       enable = true;
 
       settings.vim = {
@@ -486,8 +486,8 @@ in {
               config = {
                 week_header.enable = true;
                 packages.enable = false;
-                shortcut = mkForce {};
-                footer = mkForce {};
+                shortcut = lib.mkForce {};
+                footer = lib.mkForce {};
               };
             };
           };
@@ -512,7 +512,7 @@ in {
             enable = true;
             setupOpts = {
               ignore_filetypes = ["log" "txt" "md" "dashboard" "help"];
-              draw.animation = mkLuaInline "require('mini.indentscope').gen_animation.none()";
+              draw.animation = lib.mkLuaInline "require('mini.indentscope').gen_animation.none()";
             };
           };
           jump.enable = true;
@@ -528,7 +528,7 @@ in {
         assistant.codecompanion-nvim = {
           enable = true;
           setupOpts = {
-            adapters = mkLuaInline ''
+            adapters = lib.mkLuaInline ''
               {
                 gemini = function()
                   return require("codecompanion.adapters").extend("gemini", {

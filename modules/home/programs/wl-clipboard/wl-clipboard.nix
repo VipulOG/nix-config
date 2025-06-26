@@ -2,16 +2,16 @@
   config,
   lib,
   pkgs,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.wl-clipboard;
+}: let
+  cfg = config.custom.programs.wl-clipboard;
 in {
-  options.internal.programs.wl-clipboard = {
-    enable = mkEnableOption "wl-clipboard";
-    package = mkPackageOption pkgs "wl-clipboard" {};
+  options.custom.programs.wl-clipboard = {
+    enable = self.lib.mkCustomEnableOption "wl-clipboard";
+    package = lib.mkPackageOption pkgs "wl-clipboard" {};
   };
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     home.packages = [
       cfg.package
     ];

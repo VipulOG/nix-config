@@ -2,23 +2,22 @@
   config,
   pkgs,
   lib,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.ghostty;
+}: let
+  cfg = config.custom.programs.ghostty;
 in {
-  options.internal.programs.ghostty = {
-    enable = mkEnableOption "ghostty";
-
+  options.custom.programs.ghostty = {
+    enable = self.lib.mkCustomEnableOption "ghostty";
     package = lib.mkPackageOption pkgs "ghostty" {};
 
-    enableZellijIntegration = mkOption {
+    enableZellijIntegration = lib.mkOption {
       description = "Whether to enable zellij integration.";
-      default = config.internal.programs.zellij.enable;
+      default = config.custom.programs.zellij.enable;
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.ghostty = {
       enable = true;
       inherit (cfg) package;

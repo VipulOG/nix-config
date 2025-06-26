@@ -1,16 +1,18 @@
 {
   config,
   lib,
+  pkgs,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.brave-browser;
+}: let
+  cfg = config.custom.programs.brave-browser;
 in {
-  options.internal.programs.brave-browser = {
-    enable = mkEnableOption "brave-browser";
+  options.custom.programs.brave-browser = {
+    enable = self.lib.mkCustomEnableOption "brave-browser";
+    package = lib.mkPackageOption pkgs "brave-browser" {};
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.brave = {
       enable = true;
       commandLineArgs = [

@@ -1,16 +1,18 @@
 {
   config,
   lib,
+  pkgs,
+  self,
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.starship;
+}: let
+  cfg = config.custom.programs.starship;
 in {
-  options.internal.programs.starship = {
-    enable = mkEnableOption "starship";
+  options.custom.programs.starship = {
+    enable = self.lib.mkCustomEnableOption "starship";
+    package = lib.mkPackageOption pkgs "starship" {};
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.starship = {
       enable = true;
       settings = builtins.fromTOML (import ./config.nix);

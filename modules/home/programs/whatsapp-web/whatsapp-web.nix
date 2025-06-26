@@ -1,33 +1,19 @@
 {
   config,
   lib,
-  pkgs,
+  self,
+  self',
   ...
-}:
-with lib; let
-  cfg = config.internal.programs.whatsapp-web;
-  whatsappWebBin = pkgs.writeShellScriptBin "whatsapp-web.sh" ''
-    ${lib.getExe' pkgs.ungoogled-chromium "chromium"} --app=https://web.whatsapp.com
-  '';
-  whatsappWebExe = lib.getExe whatsappWebBin;
+}: let
+  cfg = config.custom.programs.whatsapp-web;
 in {
-  options.internal.programs.whatsapp-web = {
-    enable = mkEnableOption "whatsapp-web";
-    package = mkOption {
-      type = types.package;
-      default = whatsappWebBin;
-      readOnly = true;
-    };
+  options.custom.programs.whatsapp-web = {
+    enable = self.lib.mkCustomEnableOption "whatsapp-web";
+    package = lib.mkPackageOption self'.packages "whatsapp-web" {};
   };
-  config = mkIf cfg.enable {
-    xdg.desktopEntries = {
-      whatsapp-web = {
-        name = "WhatsApp Web";
-        exec = whatsappWebExe;
-        icon = "${./whatsapp-icon.svg}";
-        type = "Application";
-        categories = ["Network" "InstantMessaging"];
-      };
-    };
+  config = lib.mkIf cfg.enable {
+    home.packages = [
+      cfg.package
+    ];
   };
 }
