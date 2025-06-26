@@ -15,6 +15,7 @@ in {
   config = lib.mkIf cfg.enable {
     programs.helix = {
       enable = true;
+      inherit (cfg) package;
       defaultEditor = true;
       settings = {
         editor.cursor-shape = {

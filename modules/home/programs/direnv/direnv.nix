@@ -15,6 +15,7 @@ in {
   config = lib.mkIf cfg.enable {
     programs.direnv = {
       enable = true;
+      inherit (cfg) package;
       nix-direnv.enable = true;
     };
   };

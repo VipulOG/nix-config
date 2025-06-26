@@ -10,12 +10,13 @@
 in {
   options.custom.programs.zellij = {
     enable = self.lib.mkCustomEnableOption "zellij";
-    package = lib.mkPackageOption pkgs "zellij";
+    package = lib.mkPackageOption pkgs "zellij" {};
   };
 
   config = lib.mkIf cfg.enable {
     programs.zellij = {
       enable = true;
+      inherit (cfg) package;
       settings = {
         show_startup_tips = false;
       };

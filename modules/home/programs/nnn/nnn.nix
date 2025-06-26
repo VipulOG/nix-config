@@ -15,6 +15,7 @@ in {
   config = lib.mkIf cfg.enable {
     programs.nnn = {
       enable = true;
+      inherit (cfg) package;
     };
   };
 }

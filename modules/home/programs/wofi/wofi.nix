@@ -9,12 +9,13 @@
 in {
   options.custom.programs.wofi = {
     enable = self.lib.mkCustomEnableOption "wofi";
-    package = lib.mkPackageOption pkgs "wofi";
+    package = lib.mkPackageOption pkgs "wofi" {};
   };
 
   config = lib.mkIf cfg.enable {
     programs.wofi = {
       enable = true;
+      inherit (cfg) package;
       style = import ./style.nix {inherit config;};
 
       settings = {

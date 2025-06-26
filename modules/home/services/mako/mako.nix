@@ -2,6 +2,7 @@
   config,
   lib,
   self,
+  pkgs,
   ...
 }: let
   cfg = config.custom.services.mako;
@@ -13,6 +14,7 @@
 in {
   options.custom.services.mako = {
     enable = self.lib.mkCustomEnableOption "mako";
+    package = lib.mkPackageOption pkgs "mako" {};
   };
   config = lib.mkIf cfg.enable {
     services.mako = {

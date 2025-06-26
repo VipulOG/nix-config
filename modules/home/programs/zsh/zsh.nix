@@ -9,12 +9,13 @@
 in {
   options.custom.programs.zsh = {
     enable = self.lib.mkCustomEnableOption "zsh";
-    package = lib.mkPackageOption pkgs "zsh";
+    package = lib.mkPackageOption pkgs "zsh" {};
   };
 
   config = lib.mkIf cfg.enable {
     programs.zsh = {
       enable = true;
+      inherit (cfg) package;
 
       enableCompletion = true;
       autosuggestion.enable = true;

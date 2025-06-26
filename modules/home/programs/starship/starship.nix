@@ -15,6 +15,7 @@ in {
   config = lib.mkIf cfg.enable {
     programs.starship = {
       enable = true;
+      inherit (cfg) package;
       settings = builtins.fromTOML (import ./config.nix);
     };
   };

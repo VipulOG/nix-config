@@ -2,8 +2,8 @@
   lib,
   config,
   inputs,
+  inputs',
   self,
-  pkgs,
   ...
 } @ args: let
   cfg = config.custom.programs.niri;
@@ -12,11 +12,15 @@ in {
 
   options.custom.programs.niri = {
     enable = self.lib.mkCustomEnableOption "niri";
-    package = lib.mkPackageOption pkgs "niri-unstable" {};
+    package = lib.mkPackageOption inputs'.niri.packages "niri-unstable" {};
   };
 
   config = lib.mkIf cfg.enable {
     nixpkgs.overlays = [inputs.niri.overlays.niri];
-    programs.niri.config = import ./config args;
+    programs.niri = {
+      enable = true;
+      inherit (cfg) package;
+      config = import ./config args;
+    };
   };
 }

@@ -15,6 +15,7 @@ in {
   config = lib.mkIf cfg.enable {
     programs.lazygit = {
       enable = true;
+      inherit (cfg) package;
 
       settings = {
         gui = {

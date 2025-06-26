@@ -33,6 +33,7 @@ in {
   config = lib.mkIf cfg.enable {
     programs.git = {
       enable = true;
+      inherit (cfg) package;
 
       userName = cfg.userName;
       userEmail = cfg.userEmail;

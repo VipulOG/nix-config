@@ -15,6 +15,7 @@ in {
   config = lib.mkIf cfg.enable {
     programs.atuin = {
       enable = true;
+      inherit (cfg) package;
       daemon.enable = true;
     };
   };

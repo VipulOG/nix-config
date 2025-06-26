@@ -15,6 +15,7 @@ in {
   config = lib.mkIf cfg.enable {
     programs.brave = {
       enable = true;
+      inherit (cfg) package;
       commandLineArgs = [
         "--no-default-browser-check"
         "--restore-last-session"
