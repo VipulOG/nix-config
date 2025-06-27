@@ -1,36 +1,69 @@
-{
-  lib,
-  pkgs,
-  ...
-}: let
-  inherit (lib) getExe';
+{pkgs, ...} @ args: let
+  inherit (import ./lib.nix args) spawn;
 
-  launchAppLauncher = spawn (sh "${exes.flock} -n /tmp/wofi.lock ${exes.wofi} --show drun");
-  launchGhostty = spawn ["${exes.ghostty}"];
-  launchClipse = spawn (sh "${exes.ghostty} --title=clipse --command=${exes.clipse}");
-
-  muteMic = spawn ["${exes.swayosdClient}" "--input-volume" "mute-toggle"];
-  muteAudio = spawn ["${exes.swayosdClient}" "--output-volume" "mute-toggle"];
-  lowerVolume = spawn ["${exes.swayosdClient}" "--output-volume" "lower"];
-  raiseVolume = spawn ["${exes.swayosdClient}" "--output-volume" "raise"];
-
-  exes = {
-    clipse = getExe' pkgs.clipse "clipse";
-    flock = getExe' pkgs.util-linux "flock";
-    ghostty = getExe' pkgs.ghostty "ghostty";
-    swayosdClient = getExe' pkgs.swayosd "swayosd-client";
-    wofi = getExe' pkgs.wofi "wofi";
+  launch-app-launcher = spawn {
+    programs = ["wofi"];
+    command = deps: [
+      "${pkgs.util-linux}/bin/flock"
+      "-n"
+      "/tmp/wofi.lock"
+      "${deps.wofi}/bin/wofi"
+      "--show=drun"
+    ];
   };
 
-  sh = command: ["sh" "-c" "${command}"];
+  launch-ghostty = spawn {
+    programs = ["ghostty"];
+    command = deps: ["${deps.ghostty}/bin/ghostty"];
+  };
 
-  spawn = command_list: (
-    lib.pipe command_list [
-      (command_list: map (item: "\"" + item + "\"") command_list)
-      (quoted_commands: lib.strings.concatStringsSep " " quoted_commands)
-      (commands: "spawn ${commands}")
-    ]
-  );
+  launch-clipse = spawn {
+    programs = ["ghostty"];
+    services = ["clipse"];
+    command = deps: [
+      "${deps.ghostty}/bin/ghostty"
+      "--command=${deps.clipse}/bin/clipse"
+      "--gtk-single-instance=true"
+      "--title=clipse"
+      "--class=app.clipse"
+    ];
+  };
+
+  mute-mic = spawn {
+    services = ["swayosd"];
+    command = deps: [
+      "${deps.swayosd}/bin/swayosd-client"
+      "--input-volume"
+      "mute-toggle"
+    ];
+  };
+
+  mute-audio = spawn {
+    services = ["swayosd"];
+    command = deps: [
+      "${deps.swayosd}/bin/swayosd-client"
+      "--output-volume"
+      "mute-toggle"
+    ];
+  };
+
+  lower-volume = spawn {
+    services = ["swayosd"];
+    command = deps: [
+      "${deps.swayosd}/bin/swayosd-client"
+      "--output-volume"
+      "lower"
+    ];
+  };
+
+  raise-volume = spawn {
+    services = ["swayosd"];
+    command = deps: [
+      "${deps.swayosd}/bin/swayosd-client"
+      "--output-volume"
+      "raise"
+    ];
+  };
 in
   #kdl
   ''
@@ -207,33 +240,33 @@ in
         show-hotkey-overlay
       }
       Mod+Space {
-        ${launchAppLauncher}
+        ${launch-app-launcher}
       }
 
       //////////  Volume Control  //////////
       XF86AudioMicMute {
-        ${muteMic}
+        ${mute-mic}
       }
       XF86AudioMute {
-        ${muteAudio}
+        ${mute-audio}
       }
       XF86AudioRaiseVolume {
-        ${raiseVolume}
+        ${raise-volume}
       }
       XF86AudioLowerVolume {
-        ${lowerVolume}
+        ${lower-volume}
       }
       Mod+F9 {
-        ${muteMic}
+        ${mute-mic}
       }
       Mod+F10 {
-        ${muteAudio}
+        ${mute-audio}
       }
       Mod+F11 {
-        ${raiseVolume}
+        ${raise-volume}
       }
       Mod+F12 {
-        ${lowerVolume}
+        ${lower-volume}
       }
 
       //////////  Screenshots  //////////
@@ -249,10 +282,10 @@ in
 
       //////////  Applications  //////////
       Mod+T {
-        ${launchGhostty}
+        ${launch-ghostty}
       }
       Mod+Ctrl+V {
-        ${launchClipse}
+        ${launch-clipse}
       }
     }
   ''

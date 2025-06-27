@@ -9,7 +9,7 @@
 in {
   options.custom.programs.zen-browser = {
     enable = self.lib.mkCustomEnableOption "zen-browser";
-    package = lib.mkPackageOption inputs'.zen-browser.packages "twilight" {};
+    package = lib.mkPackageOption inputs'.zen-browser.packages "default" {};
   };
 
   config = lib.mkIf cfg.enable {

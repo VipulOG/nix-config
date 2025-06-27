@@ -13,6 +13,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    home.packages = [
+      pkgs.wl-clipboard
+    ];
+
     services.clipse = {
       inherit (cfg) package;
       enable = true;

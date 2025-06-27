@@ -12,22 +12,22 @@
   }
 
   window-rule {
-    match at-startup=true app-id="^zen"
+    match at-startup=true app-id="^zen(-beta)?$"
     open-on-workspace "web"
   }
 
   window-rule {
-    match at-startup=true app-id="^chrome-web.whatsapp.com"
+    match at-startup=true app-id="com.whatsapp.web"
     open-on-workspace "chat"
   }
 
   window-rule {
-    match at-startup=true title="btop"
+    match at-startup=true app-id="app.btop"
     open-on-workspace "system-monitor"
   }
 
   window-rule {
-    match title="clipse"
+    match app-id="app.clipse"
     open-floating true
   }
 ''

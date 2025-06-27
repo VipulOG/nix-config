@@ -1,45 +1,52 @@
-{
-  lib,
-  config,
-  pkgs,
-  inputs',
-  ...
-}: let
-  inherit (lib) getExe';
+{pkgs, ...} @ args: let
+  inherit (import ./lib.nix args) spawn-at-startup;
 
-  launchGhostty = spawn ["${exes.ghostty}"];
-  launchZenBrowser = spawn ["${exes.zenBrowser}"];
-  launchWhatsappWeb = spawn ["${exes.whatsappWeb}"];
-  launchBtop = spawn ["${exes.ghostty}" "--command=${exes.btop}" "--title=btop"];
-
-  exes = {
-    btop = getExe' pkgs.btop "btop";
-    ghostty = getExe' pkgs.ghostty "ghostty";
-    swaybg = getExe' pkgs.swaybg "swaybg";
-    whatsappWeb = config.custom.programs.whatsapp-web.package;
-    xwaylandSatellite = getExe' pkgs.xwayland-satellite "xwayland-satellite";
-    zenBrowser = getExe' inputs'.zen-browser.packages.default "zen-browser";
+  start-swaybg = spawn-at-startup {
+    command = _: ["${pkgs.swaybg}/bin/swaybg"];
   };
 
-  spawn = command_list: (
-    lib.pipe command_list [
-      (command_list: map (item: "\"" + item + "\"") command_list)
-      (quoted_commands: lib.strings.concatStringsSep " " quoted_commands)
-      (commands: "spawn-at-startup ${commands}")
-    ]
-  );
+  start-xwayland-satellite = spawn-at-startup {
+    command = _: ["${pkgs.xwayland-satellite}/bin/xwayland-satellite"];
+  };
+
+  launch-ghostty = spawn-at-startup {
+    programs = ["ghostty"];
+    command = deps: ["${deps.ghostty}/bin/ghostty"];
+  };
+
+  launch-zen-browser = spawn-at-startup {
+    programs = ["zen-browser"];
+    command = deps: ["${deps.zen-browser}/bin/zen"];
+  };
+
+  launch-whatsapp-web = spawn-at-startup {
+    programs = ["whatsapp-web"];
+    command = deps: ["${deps.whatsapp-web}/bin/whatsapp-web"];
+  };
+
+  launch-btop = spawn-at-startup {
+    programs = ["ghostty" "btop"];
+    command = deps: [
+      "${deps.ghostty}/bin/ghostty"
+      "--command=${deps.btop}/bin/btop"
+      "--gtk-single-instance=true"
+      "--title=btop"
+      "--class=app.btop"
+    ];
+  };
 in
   #kdl
   ''
-    spawn-at-startup "${exes.xwaylandSatellite}"
+    ${start-xwayland-satellite}
+    ${start-swaybg}
 
     spawn-at-startup "systemctl" "--user" "restart" "xdg-desktop-portal-gnome"
     spawn-at-startup "systemctl" "--user" "restart" "swayidle"
     spawn-at-startup "systemctl" "--user" "restart" "swayosd"
     spawn-at-startup "systemctl" "--user" "restart" "clipse"
 
-    ${launchGhostty}
-    ${launchZenBrowser}
-    ${launchWhatsappWeb}
-    ${launchBtop}
+    ${launch-ghostty}
+    ${launch-zen-browser}
+    ${launch-whatsapp-web}
+    ${launch-btop}
   ''

@@ -17,8 +17,6 @@ in {
         niri.enable = true;
         wofi.enable = true;
         swaylock.enable = true;
-        xwayland-satellite.enable = true;
-        wl-clipboard.enable = true;
         nautilus.enable = true;
       };
 
@@ -30,6 +28,7 @@ in {
           monitorsOffCommand = "${lib.getExe pkgs.niri} msg action power-off-monitors";
           monitorsOnCommand = "${lib.getExe pkgs.niri} msg action power-on-monitors";
         };
+        clipse.enable = true;
       };
 
       misc.stylix = {
