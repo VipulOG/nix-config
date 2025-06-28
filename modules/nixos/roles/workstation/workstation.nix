@@ -19,7 +19,7 @@ in {
         time.enable = true;
         locale.enable = true;
         fonts.enable = true;
-        autoUpdate.enable = true;
+        autoUpdate.enable = false;
       };
 
       services = {
