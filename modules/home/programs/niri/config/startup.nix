@@ -1,10 +1,6 @@
 {pkgs, ...} @ args: let
   inherit (import ./lib.nix args) spawn-at-startup;
 
-  start-swaybg = spawn-at-startup {
-    command = _: ["${pkgs.swaybg}/bin/swaybg"];
-  };
-
   start-xwayland-satellite = spawn-at-startup {
     command = _: ["${pkgs.xwayland-satellite}/bin/xwayland-satellite"];
   };
@@ -38,7 +34,6 @@ in
   #kdl
   ''
     ${start-xwayland-satellite}
-    ${start-swaybg}
 
     spawn-at-startup "systemctl" "--user" "restart" "xdg-desktop-portal-gnome"
     spawn-at-startup "systemctl" "--user" "restart" "swayidle"

@@ -23,6 +23,7 @@ in {
       services = {
         mako.enable = true;
         swayosd.enable = true;
+        wpaperd.enable = true;
         swayidle = {
           enable = true;
           monitorsOffCommand = "${lib.getExe pkgs.niri} msg action power-off-monitors";

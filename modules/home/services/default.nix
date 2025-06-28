@@ -5,5 +5,6 @@
     ./mako
     ./swayidle
     ./swayosd
+    ./wpaperd
   ];
 }
