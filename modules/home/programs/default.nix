@@ -23,5 +23,7 @@
     ./nautilus
     ./swaylock
     ./niri
+    ./eog
+    ./gemini-cli
   ];
 }

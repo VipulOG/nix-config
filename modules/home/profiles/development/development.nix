@@ -21,6 +21,7 @@ in {
         zoxide.enable = true;
         direnv.enable = true;
         zellij.enable = true;
+        gemini-cli.enable = true;
       };
     };
   };

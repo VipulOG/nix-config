@@ -18,6 +18,7 @@ in {
         wofi.enable = true;
         swaylock.enable = true;
         nautilus.enable = true;
+        eog.enable = true;
       };
 
       services = {
