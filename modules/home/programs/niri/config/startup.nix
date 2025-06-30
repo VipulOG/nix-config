@@ -39,6 +39,7 @@ in
     spawn-at-startup "systemctl" "--user" "restart" "swayidle"
     spawn-at-startup "systemctl" "--user" "restart" "swayosd"
     spawn-at-startup "systemctl" "--user" "restart" "clipse"
+    spawn-at-startup "systemctl" "--user" "restart" "wpaperd"
 
     ${launch-ghostty}
     ${launch-zen-browser}
