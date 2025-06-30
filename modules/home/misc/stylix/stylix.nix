@@ -58,11 +58,11 @@ in {
           iconTheme = {
             enable = true;
             package = pkgs.colloid-icon-theme.override {
-              schemeVariants = ["catppuccin"];
-              colorVariants = ["purple"];
+              schemeVariants = ["default"];
+              colorVariants = ["default"];
             };
-            light = "Colloid-Purple-Catppuccin-Light";
-            dark = "Colloid-Purple-Catppuccin-Dark";
+            light = "Colloid-Light";
+            dark = "Colloid-Dark";
           };
 
           opacity = {
