@@ -1115,16 +1115,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1751026553,
-        "narHash": "sha256-zao1ZWphb3VsVEexC/PcrR162pu+SA4BxyD/73AVSlc=",
-        "owner": "VipulOG",
+        "lastModified": 1751161919,
+        "narHash": "sha256-t08tIneq3fcA2eRZVMR6Kt1MCJHpPwc+5pDHGVOJUbA=",
+        "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "0911653a5a1e2db2fb3895990d3ea5349477a30d",
+        "rev": "0210fe94de8d6825ceb15249bf03840c8ca44e2b",
         "type": "github"
       },
       "original": {
-        "owner": "VipulOG",
-        "ref": "fix/app-id",
+        "owner": "0xc000022070",
         "repo": "zen-browser-flake",
         "type": "github"
       }

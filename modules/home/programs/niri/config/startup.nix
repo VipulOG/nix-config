@@ -12,7 +12,7 @@
 
   launch-zen-browser = spawn-at-startup {
     programs = ["zen-browser"];
-    command = deps: ["${deps.zen-browser}/bin/zen"];
+    command = deps: ["${deps.zen-browser}/bin/zen-beta"];
   };
 
   launch-whatsapp-web = spawn-at-startup {
