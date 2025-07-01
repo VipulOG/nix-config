@@ -13,6 +13,7 @@ in {
   config = lib.mkIf cfg.enable {
     custom = {
       programs = {
+        home-manager.enable = true;
         zsh.enable = true;
         git.enable = true;
         btop.enable = true;

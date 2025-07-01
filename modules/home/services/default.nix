@@ -6,5 +6,6 @@
     ./swayidle
     ./swayosd
     ./wpaperd
+    ./home-manager
   ];
 }
