@@ -17,7 +17,7 @@
   }
 
   window-rule {
-    match at-startup=true app-id="com.whatsapp.web"
+    match at-startup=true app-id="^brave-web.whatsapp.com"
     open-on-workspace "chat"
   }
 
