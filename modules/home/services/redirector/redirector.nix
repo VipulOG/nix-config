@@ -27,6 +27,10 @@ in {
             trigger = "hmopt";
             url_template = "https://home-manager-options.extranix.com/?query={{{s}}}";
           }
+          {
+            trigger = "noog";
+            url_template = "https://noogle.dev/q?term={{{s}}}";
+          }
         ];
       };
     };
