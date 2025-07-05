@@ -102,6 +102,10 @@
       };
 
       imports = [
+        inputs.git-hooks-nix.flakeModule
+        inputs.treefmt-nix.flakeModule
+        inputs.home-manager.flakeModules.home-manager
+
         ./lib/flake-module.nix
         ./checks/flake-module.nix
         ./formatter/flake-module.nix
@@ -110,10 +114,6 @@
         ./modules/flake-module.nix
         ./hosts/flake-module.nix
         ./homes/flake-module.nix
-
-        inputs.git-hooks-nix.flakeModule
-        inputs.treefmt-nix.flakeModule
-        inputs.home-manager.flakeModules.home-manager
       ];
     };
 }
