@@ -29,7 +29,9 @@
         destroyed-symlinks = {
           enable = true;
           name = "detect destroyed symlinks";
-          description = "detects symlinks which are changed to regular files with a content of a path which that symlink was pointing to.";
+          description = ''
+            detects symlinks which are changed to regular files with a content of a path which
+            that symlink was pointing to.'';
           package = inputs'.git-hooks-nix.checks.pre-commit-hooks;
           entry = "${inputs'.git-hooks-nix.checks.pre-commit-hooks}/bin/destroyed-symlinks";
           types = ["symlink"];
