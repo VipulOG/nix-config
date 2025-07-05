@@ -5,10 +5,7 @@
 }: let
   cfg = config.custom.programs.neovim;
 
-  colors =
-    if config.custom.misc.stylix.enable
-    then config.lib.stylix.colors.withHashtag
-    else config.custom.common.vars.colorScheme.sheme.withHashtag;
+  colors = config.custom.common.vars.colorScheme.sheme.withHashtag;
 in {
   config = lib.mkIf cfg.enable {
     programs.nvf.settings.vim.theme = {
