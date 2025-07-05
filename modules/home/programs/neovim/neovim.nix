@@ -32,27 +32,66 @@ in {
         viAlias = true;
         withNodeJs = true;
 
+        filetree.nvimTree = {
+          enable = true;
+          openOnSetup = false;
+          mappings.toggle = "<leader>tt";
+        };
+
         options = {
           tabstop = 2;
           shiftwidth = 2;
-          scrolloff = 5;
+          scrolloff = 4;
           wrap = false;
+        };
+
+        theme = {
+          enable = true;
+          name = "base16";
+          base16-colors = {
+            inherit
+              (colors)
+              base00
+              base01
+              base02
+              base03
+              base04
+              base05
+              base06
+              base07
+              base08
+              base09
+              base0A
+              base0B
+              base0C
+              base0D
+              base0E
+              base0F
+              ;
+          };
         };
 
         keymaps = [
           {
             key = "<leader>bd";
             mode = ["n"];
-            action = "<Cmd>lua MiniBufremove.delete()<CR>";
-            silent = true;
+            action = "MiniBufremove.delete";
+            lua = true;
             desc = "Delete buffer";
           }
           {
             key = "<leader>bw";
             mode = ["n"];
-            action = "<Cmd>lua MiniBufremove.wipeout()<CR>";
-            silent = true;
+            action = "MiniBufremove.wipeout";
+            lua = true;
             desc = "Wipeout buffer";
+          }
+          {
+            key = "<leader>e";
+            mode = ["n"];
+            action = "vim.diagnostic.open_float";
+            lua = true;
+            desc = "Show floating diagnostic";
           }
         ];
 
@@ -98,8 +137,12 @@ in {
         diagnostics = {
           enable = true;
           config = {
-            virtual_lines.enable = true;
+            virtual_lines = false;
+            virtual_text = false;
+            signs = true;
             underline = true;
+            update_in_insert = false;
+            float.border = "rounded";
           };
         };
 
@@ -157,14 +200,18 @@ in {
           nvim-notify = {
             enable = true;
             setupOpts = {
-              render = "minimal";
+              render = "default";
               stages = "fade";
-              timeout = 1500;
+              timeout = 1000;
             };
           };
         };
 
         ui = {
+          borders = {
+            enable = true;
+            globalStyle = "rounded";
+          };
           smartcolumn = {
             enable = true;
             setupOpts = {
@@ -179,12 +226,35 @@ in {
               alwaysRender = false;
             };
           };
-          noice.enable = true;
+          noice = {
+            enable = true;
+            setupOpts = {
+              lsp.signature.enabled = true;
+              presets = {
+                bottom_search = true;
+                command_palette = true;
+                long_message_to_split = true;
+                inc_rename = true;
+                lsp_doc_border = true;
+              };
+              routes = [
+                {
+                  filter = {
+                    event = "msg_show";
+                    kind = "";
+                    find = "written";
+                  };
+                  opts = {skip = true;};
+                }
+              ];
+            };
+          };
         };
 
         statusline = {
           lualine = {
             enable = true;
+            theme = "base16";
             activeSection = {
               a = [
                 ''
@@ -471,8 +541,17 @@ in {
         };
 
         binds = {
-          hardtime-nvim.enable = true;
-          whichKey.enable = true;
+          hardtime-nvim.enable = false;
+          whichKey = {
+            enable = true;
+            register = {
+              "<leader>f" = "+Telescope";
+              "<leader>fl" = "Telescope LSP";
+              "<leader>fv" = "Telescope Git";
+              "<leader>fvc" = "Commits";
+              "<leader>b" = "+Buffer";
+            };
+          };
         };
 
         projects = {

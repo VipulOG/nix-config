@@ -70,6 +70,8 @@ in {
           popups = 1.0;
           terminal = 1.0;
         };
+
+        targets.nvf.enable = false;
       })
 
       (lib.removeAttrs cfg.extraConfig ["enable"])
