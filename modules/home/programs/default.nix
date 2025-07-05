@@ -17,7 +17,7 @@
     ./android-studio
     ./whatsapp-web
     ./zellij
-    ./neovim
+    ./neovim-modular
     ./coreutils
     ./wofi
     ./nautilus
