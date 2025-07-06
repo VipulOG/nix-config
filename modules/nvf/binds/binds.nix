@@ -1,6 +1,7 @@
 {
   config.vim.binds = {
     hardtime-nvim.enable = false;
+
     whichKey = {
       enable = true;
       register = {

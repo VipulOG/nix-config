@@ -4,12 +4,14 @@
       enable = true;
       globalStyle = "rounded";
     };
+
     smartcolumn = {
       enable = true;
       setupOpts = {
         disabled_filetypes = ["dashboard"];
       };
     };
+
     breadcrumbs = {
       enable = true;
       navbuddy.enable = true;
@@ -18,6 +20,7 @@
         alwaysRender = false;
       };
     };
+
     noice = {
       enable = true;
       setupOpts = {
