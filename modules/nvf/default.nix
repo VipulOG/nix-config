@@ -1,28 +1,28 @@
 {
   imports = [
-    ./ai.nix
-    ./autocomplete.nix
-    ./git.nix
-    ./lang.nix
-    ./lsp.nix
-    ./mini.nix
-    ./ui.nix
-    ./utility.nix
-    ./filetree.nix
-    ./diagnostics.nix
-    ./spellcheck.nix
-    ./clipboard.nix
-    ./comments.nix
-    ./telescope.nix
-    ./theme.nix
-    ./treesitter.nix
-    ./notify.nix
-    ./statusline.nix
-    ./visuals.nix
-    ./notes.nix
-    ./binds.nix
-    ./projects.nix
-    ./dashboard.nix
-    ./options.nix
+    ./ai
+    ./autocomplete
+    ./binds
+    ./clipboard
+    ./comments
+    ./dashboard
+    ./diagnostics
+    ./filetree
+    ./git
+    ./lang
+    ./lsp
+    ./mini
+    ./notes
+    ./notify
+    ./options
+    ./projects
+    ./spellcheck
+    ./statusline
+    ./telescope
+    ./theme
+    ./treesitter
+    ./ui
+    ./utility
+    ./visuals
   ];
 }

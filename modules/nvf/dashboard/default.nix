@@ -1,0 +1,3 @@
+{
+  imports = [./dashboard.nix];
+}
