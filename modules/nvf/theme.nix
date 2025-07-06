@@ -1,14 +1,8 @@
-{
-  lib,
-  config,
-  ...
-}: let
-  cfg = config.custom.programs.neovim;
-
-  colors = config.custom.common.vars.colorScheme.sheme.withHashtag;
+{config, ...}: let
+  colors = config.custom.common.vars.colorScheme.scheme.withHashtag;
 in {
-  config = lib.mkIf cfg.enable {
-    programs.nvf.settings.vim.theme = {
+  config = {
+    vim.theme = {
       enable = true;
       name = "base16";
       base16-colors = {
