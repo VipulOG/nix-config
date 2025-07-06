@@ -756,15 +756,16 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1750842150,
-        "narHash": "sha256-slD1Nzr7SStRhQgC1WmrIsgrgwgRyag2MAxCSrjrxKg=",
-        "owner": "notashelf",
+        "lastModified": 1751786277,
+        "narHash": "sha256-NuyuNF4psX+GVd35SjQxmf8FVYzEZ/xsqcWgr9QlwUU=",
+        "owner": "vipulog",
         "repo": "nvf",
-        "rev": "f9ee813a230e1c0ba0e1a13e1747fd1b996f08dc",
+        "rev": "1d64c10116e9b7d858a68e8e6d763f01c59eccb0",
         "type": "github"
       },
       "original": {
-        "owner": "notashelf",
+        "owner": "vipulog",
+        "ref": "feat/allow-override-inputs-self",
         "repo": "nvf",
         "type": "github"
       }

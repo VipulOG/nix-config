@@ -1,5 +1,6 @@
 {
   imports = [
     ./whatsapp-web
+    ./nvf
   ];
 }

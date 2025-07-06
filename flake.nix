@@ -66,7 +66,7 @@
     };
 
     nvf = {
-      url = "github:notashelf/nvf";
+      url = "github:vipulog/nvf?ref=feat/allow-override-inputs-self";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
