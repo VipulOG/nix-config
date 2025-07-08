@@ -25,6 +25,7 @@
       enable = true;
       setupOpts = {
         lsp.signature.enabled = true;
+
         presets = {
           bottom_search = true;
           command_palette = true;
@@ -32,6 +33,7 @@
           inc_rename = true;
           lsp_doc_border = true;
         };
+
         routes = [
           {
             filter = {

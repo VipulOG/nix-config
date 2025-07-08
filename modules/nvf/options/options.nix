@@ -4,5 +4,7 @@
     shiftwidth = 2;
     scrolloff = 4;
     wrap = false;
+    relativenumber = false;
+    cursorlineopt = "both";
   };
 }

@@ -10,6 +10,7 @@
         "<leader>fv" = "Telescope Git";
         "<leader>fvc" = "Commits";
         "<leader>b" = "+Buffer";
+        "<leader>l" = "+LSP";
       };
     };
   };

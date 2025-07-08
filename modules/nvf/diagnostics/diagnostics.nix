@@ -11,15 +11,5 @@
         float.border = "rounded";
       };
     };
-
-    keymaps = [
-      {
-        key = "<leader>e";
-        mode = ["n"];
-        action = "vim.diagnostic.open_float";
-        lua = true;
-        desc = "Show floating diagnostic";
-      }
-    ];
   };
 }
