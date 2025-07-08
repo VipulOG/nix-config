@@ -9,8 +9,9 @@
         "<leader>fl" = "Telescope LSP";
         "<leader>fv" = "Telescope Git";
         "<leader>fvc" = "Commits";
-        "<leader>b" = "+Buffer";
-        "<leader>l" = "+LSP";
+        "<leader>b" = "Buffer";
+        "<leader>l" = "LSP";
+        "<leader>td" = "TODO";
       };
     };
   };

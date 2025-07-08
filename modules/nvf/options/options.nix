@@ -5,6 +5,7 @@
     scrolloff = 4;
     wrap = false;
     relativenumber = false;
-    cursorlineopt = "both";
+    cursorlineopt = "number";
+    winblend = 5;
   };
 }

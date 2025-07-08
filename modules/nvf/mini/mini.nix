@@ -12,7 +12,6 @@
       operators.enable = true;
       pairs.enable = true;
       splitjoin.enable = true;
-      tabline.enable = true;
       trailspace.enable = true;
 
       basics = {

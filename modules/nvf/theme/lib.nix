@@ -8,7 +8,7 @@
       lib.attrsets.filterAttrs isBaseColor colors;
 
     darken = color: percent: let
-      hexToInt = hex: builtins.fromJSON "[0x${hex}]";
+      hexToInt = hex: lib.fromHexString hex;
       scale = c: builtins.floor (c * (1.0 - percent));
 
       r = hexToInt (builtins.substring 1 2 color);
@@ -21,8 +21,8 @@
 
       toHex = c: (
         if c < 16
-        then "0${builtins.toHexString c}"
-        else builtins.toHexString c
+        then "0${lib.toHexString c}"
+        else lib.toHexString c
       );
     in
       lib.pipe [newR newG newB] [

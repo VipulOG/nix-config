@@ -14,10 +14,10 @@ in {
     };
 
     highlight = {
-      WinSeparator = {fg = baseColors.base02;};
-      LineNr = {fg = baseColors.base03;};
-      CursorLineNr = {fg = baseColors.base04;};
-      Pmenu = {bg = baseColors.base00;};
+      WinSeparator.fg = baseColors.base02;
+      LineNr.fg = baseColors.base03;
+      CursorLineNr.fg = baseColors.base04;
+      Pmenu.bg = baseColors.base00;
     };
   };
 }

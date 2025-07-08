@@ -18,6 +18,7 @@
     ./projects
     ./spellcheck
     ./statusline
+    ./tabline
     ./telescope
     ./theme
     ./treesitter
