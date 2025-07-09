@@ -70,7 +70,7 @@ in {
             ''
               {
                 function()
-                  return [[|]]
+                  return [[│]]
                 end,
                 cond = require("noice").api.statusline.mode.has,
                 icons_enabled = false,
@@ -134,7 +134,7 @@ in {
             ''
               {
                 function()
-                  return [[|]]
+                  return [[│]]
                 end,
                 icons_enabled = false,
                 icon = nil,
@@ -180,7 +180,7 @@ in {
             ''
               {
                 function()
-                  return [[|]]
+                  return [[│]]
                 end,
                 cond = function()
                   local ok, MiniGit = pcall(require, 'mini.git')
