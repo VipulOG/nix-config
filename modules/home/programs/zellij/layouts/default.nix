@@ -17,7 +17,7 @@ in
       pane size=1 borderless=true {
         plugin location="${pluginPath}" {
           hide_frame_for_single_pane "true"
-          format_left "{mode}#[fg=${colors.base05},bg=${colors.base01}] {session}#[bg=${colors.base01}] "
+          format_left "{mode}#[fg=${colors.base06},bg=${colors.base01}] {session}#[bg=${colors.base01}] "
           format_right "{datetime}"
           format_center "{tabs}"
           format_space "#[bg=${colors.base01}]"
@@ -35,7 +35,7 @@ in
           mode_session "#[fg=${colors.base01},bg=${colors.base06},bold] "
           mode_move "#[fg=${colors.base01},bg=${colors.base05},bold] "
           mode "tmux"
-          tab_normal "#[fg=${colors.base03},bg=${colors.base01}] {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
+          tab_normal "#[fg=${colors.base04},bg=${colors.base01}] {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
           tab_active "#[fg=${colors.base05},bg=${colors.base01},bold] {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
           tab_fullscreen_indicator "□ "
           tab_sync_indicator "  "
