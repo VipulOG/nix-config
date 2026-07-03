@@ -11,6 +11,7 @@
     preservation = {
       includes = with den.aspects.ephemeral-host.preservation; [
         defaults.host
+        defaults.user
       ];
 
       nixos = {
@@ -87,6 +88,17 @@
                 "systemd-machine-id-setup --commit --root ${defaultPreserveAt}"
               ];
             };
+          };
+        };
+
+        user = {user}: {
+          nixos = {
+            preservation.preserve.users.${user.name}.directories = [
+              "Documents"
+              "Pictures"
+              "Videos"
+              "Dev"
+            ];
           };
         };
       };
