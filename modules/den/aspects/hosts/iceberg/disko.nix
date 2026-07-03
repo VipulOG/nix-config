@@ -1,5 +1,7 @@
-{
+{den, ...}: {
   den.aspects.iceberg.disko = {
+    includes = [den.aspects.disko];
+
     nixos = {
       disko = {
         imageBuilder.extraRootModules = ["btrfs"];
