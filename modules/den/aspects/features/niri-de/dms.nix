@@ -133,7 +133,7 @@
 
                 rightWidgets = [
                   # "systemTray"
-                  "clipboard"
+                  # "clipboard"
                   "cpuUsage"
                   "memUsage"
                   "notificationButton"
