@@ -9,6 +9,10 @@
         den.policies.iceberg-to-users
         den.policies.iceberg-to-tux
 
+        den.aspects.iceberg.hardware
+        den.aspects.iceberg.disko
+
+        den.aspects.disko
         den.aspects.ephemeral-host
         den.aspects.sops-nix
         den.aspects.niri-de

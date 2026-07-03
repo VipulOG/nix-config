@@ -6,7 +6,7 @@
     };
   };
 
-  den.aspects.niri-de = let
+  den.aspects.niri-de.dms = let
     commonCfg = pkgs: {
       enable = true;
       enableVPN = true;

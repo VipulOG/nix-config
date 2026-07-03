@@ -1,5 +1,5 @@
 {
-  den.aspects.iceberg = {
+  den.aspects.iceberg.hardware = {
     nixos = {
       modulesPath,
       lib,

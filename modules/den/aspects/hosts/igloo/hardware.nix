@@ -1,5 +1,5 @@
 {inputs, ...}: {
-  den.aspects.igloo = {
+  den.aspects.igloo.hardware = {
     nixos = {
       modulesPath,
       lib,

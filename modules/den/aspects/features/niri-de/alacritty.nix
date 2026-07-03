@@ -1,5 +1,5 @@
 {den, ...}: {
-  den.aspects.niri-de = {
+  den.aspects.niri-de.alacritty = {
     includes = [den.aspects.alacritty];
 
     homeManager = {

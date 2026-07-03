@@ -1,5 +1,5 @@
 {
-  den.aspects.iceberg = {
+  den.aspects.iceberg.disko = {
     nixos = {
       disko = {
         imageBuilder.extraRootModules = ["btrfs"];

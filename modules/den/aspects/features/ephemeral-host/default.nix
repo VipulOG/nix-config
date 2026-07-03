@@ -1,5 +1,7 @@
-{
+{den, ...}: {
   den.aspects.ephemeral-host = {
+    includes = [den.aspects.ephemeral-host.preservation];
+
     nixos = {
       lib,
       config,

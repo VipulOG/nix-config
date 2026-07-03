@@ -9,6 +9,10 @@
         den.policies.igloo-to-users
         den.policies.igloo-to-tux
 
+        den.aspects.igloo.hardware
+        den.aspects.igloo.disko
+
+        den.aspects.disko
         den.aspects.ephemeral-host
         den.aspects.sops-nix
         den.aspects.niri-de
