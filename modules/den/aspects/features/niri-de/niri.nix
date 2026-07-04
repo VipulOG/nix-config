@@ -32,6 +32,7 @@
 
           environment = {
             XDG_CURRENT_DESKTOP = "niri";
+            QT_QPA_PLATFORMTHEME = "gtk3";
           };
 
           outputs = {

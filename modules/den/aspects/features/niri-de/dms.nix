@@ -41,6 +41,7 @@
     homeManager = {
       pkgs,
       lib,
+      config,
       ...
     }: {
       imports = [
@@ -48,10 +49,54 @@
         inputs.dms.homeModules.niri
       ];
 
+      gtk = {
+        enable = true;
+        colorScheme = "dark";
+
+        theme = {
+          package = pkgs.colloid-gtk-theme;
+          name = "Colloid-Dark";
+        };
+
+        iconTheme = {
+          package = pkgs.colloid-icon-theme;
+          name = "Colloid-Dark";
+        };
+
+        cursorTheme = {
+          package = pkgs.bibata-cursors;
+          name = "Bibata-Modern-Ice";
+          size = 24;
+        };
+
+        font = {
+          package = pkgs.inter;
+          name = "Inter";
+          size = 11;
+        };
+      };
+
       programs.dank-material-shell = lib.mkMerge [
         (commonCfg pkgs)
 
         {
+          niri.includes = {
+            enable = true;
+            override = true;
+            originalFileName = "hm";
+
+            filesToInclude = [
+              "alttab"
+              "binds"
+              "colors"
+              "cursor"
+              "layout"
+              "outputs"
+              "windowrules"
+              "wpblur"
+            ];
+          };
+
           settings = {
             matugenScheme = "scheme-content";
             popupTransparency = 0.9;
@@ -77,8 +122,8 @@
             updaterHideWidget = true;
 
             cursorSettings = {
-              theme = "System Default";
-              size = 18;
+              theme = config.gtk.cursorTheme.name;
+              inherit (config.gtk.cursorTheme) size;
 
               hyprland = {
                 hideOnKeyPress = false;
