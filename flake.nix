@@ -55,6 +55,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
     nvf = {
       url = "github:notashelf/nvf";
       inputs = {

@@ -21,6 +21,15 @@
     den.url = "github:denful/den";
     flake-file.url = "github:vic/flake-file";
 
+    nur = {
+      url = "github:nix-community/NUR";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -38,6 +47,7 @@
     _module.args = {
       pkgs = import inputs.nixpkgs {
         inherit system;
+        overlays = [inputs.nur.overlays.default];
         config.allowUnfreePredicate = mkAllowPredicate [];
       };
     };
