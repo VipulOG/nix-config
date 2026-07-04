@@ -22,6 +22,7 @@
       den.aspects.nix-index
 
       den.aspects.qutebrowser
+      den.aspects.chromium
     ];
   };
 }
