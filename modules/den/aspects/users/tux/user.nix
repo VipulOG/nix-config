@@ -23,6 +23,7 @@
 
       den.aspects.qutebrowser
       den.aspects.chromium
+      den.aspects.firefox
     ];
   };
 }
