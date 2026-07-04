@@ -10,6 +10,7 @@
     homeManager = {pkgs, ...}: {
       home.packages = [
         pkgs.xwayland-satellite
+        pkgs.wl-clipboard
       ];
     };
   };
