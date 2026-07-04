@@ -1,5 +1,6 @@
 {
   den,
+  lib,
   inputs,
   ...
 }: {
@@ -7,100 +8,89 @@
     preservation.url = "github:nix-community/preservation";
   };
 
-  den.aspects.ephemeral-host = {
-    preservation = {
-      includes = with den.aspects.ephemeral-host.preservation; [
-        defaults.host
-        defaults.user
-      ];
+  den.aspects.ephemeral-host.preservation = let
+    preservationFwd = den.batteries.forward {
+      each = lib.singleton true;
+      fromClass = _item: "preservation";
+      intoClass = _item: "nixos";
+      intoPath = _item: ["preservation"];
+    };
+  in {
+    includes = [preservationFwd];
 
-      nixos = {
-        lib,
-        config,
-        options,
-        ...
-      }: let
-        hostCfg = config.ephemeral-host;
-        cfg = config.preservation;
-        inherit (cfg) defaultPreserveAt;
-      in {
-        imports = [inputs.preservation.nixosModules.default];
+    nixos = {
+      lib,
+      config,
+      options,
+      ...
+    }: let
+      hostCfg = config.ephemeral-host;
+      cfg = config.preservation;
+      inherit (cfg) defaultPreserveAt;
+    in {
+      imports = [inputs.preservation.nixosModules.default];
 
-        options.preservation = {
-          preserve = lib.mkOption {
-            type = options.preservation.preserveAt.type.nestedTypes.elemType;
-            default = {};
-          };
-
-          defaultPreserveAt = lib.mkOption {
-            type = lib.types.str;
-            default = hostCfg.persistentMountpoint;
-          };
+      options.preservation = {
+        preserve = lib.mkOption {
+          type = options.preservation.preserveAt.type.nestedTypes.elemType;
+          default = {};
         };
 
-        config = lib.mkIf hostCfg.enable {
-          preservation = {
-            enable = true;
-
-            preserveAt.${defaultPreserveAt} =
-              lib.mkAliasDefinitions options.preservation.preserve;
-
-            preserve = {
-              persistentStoragePath = defaultPreserveAt;
-            };
-          };
+        defaultPreserveAt = lib.mkOption {
+          type = lib.types.str;
+          default = hostCfg.persistentMountpoint;
         };
       };
 
-      defaults = {
-        host = {
-          nixos = {config, ...}: let
-            cfg = config.preservation;
-            inherit (cfg) defaultPreserveAt;
-          in {
-            preservation.preserve = {
-              directories = [
-                {
-                  directory = "/var/lib/nixos";
-                  inInitrd = true;
-                }
+      config = lib.mkIf hostCfg.enable {
+        preservation = {
+          enable = true;
 
-                "/etc/nixos"
-              ];
+          preserveAt.${defaultPreserveAt} =
+            lib.mkAliasDefinitions options.preservation.preserve;
 
-              files = [
-                {
-                  file = "/etc/machine-id";
-                  inInitrd = true;
-                  how = "symlink";
-                }
-              ];
-            };
-
-            systemd.services.systemd-machine-id-commit = {
-              unitConfig.ConditionPathIsMountPoint = [
-                ""
-                "${defaultPreserveAt}/etc/machine-id"
-              ];
-
-              serviceConfig.ExecStart = [
-                ""
-                "systemd-machine-id-setup --commit --root ${defaultPreserveAt}"
-              ];
-            };
-          };
+          preserve.persistentStoragePath = defaultPreserveAt;
         };
 
-        user = {user}: {
-          nixos = {
-            preservation.preserve.users.${user.name}.directories = [
-              "Documents"
-              "Pictures"
-              "Videos"
-              "Dev"
-            ];
-          };
+        systemd.services.systemd-machine-id-commit = {
+          unitConfig.ConditionPathIsMountPoint = [
+            ""
+            "${defaultPreserveAt}/etc/machine-id"
+          ];
+
+          serviceConfig.ExecStart = [
+            ""
+            "systemd-machine-id-setup --commit --root ${defaultPreserveAt}"
+          ];
         };
+      };
+    };
+
+    preservation = {user}: {
+      preserve = {
+        directories = [
+          {
+            directory = "/var/lib/nixos";
+            inInitrd = true;
+          }
+
+          "/etc/nixos"
+        ];
+
+        files = [
+          {
+            file = "/etc/machine-id";
+            inInitrd = true;
+            how = "symlink";
+          }
+        ];
+
+        users.${user.name}.directories = [
+          "Documents"
+          "Pictures"
+          "Videos"
+          "Dev"
+        ];
       };
     };
   };

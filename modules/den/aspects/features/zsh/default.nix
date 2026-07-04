@@ -1,29 +1,5 @@
-{den, ...}: {
+{
   den.aspects.zsh = {
-    host,
-    user,
-  }: let
-    isEphemeralHost = host.hasAspect den.aspects.ephemeral-host;
-  in {
-    nixos = {lib, ...}: {
-      config = lib.mkMerge [
-        {environment.pathsToLink = ["/share/zsh"];}
-
-        (lib.mkIf isEphemeralHost {
-          preservation.preserve = {
-            users = lib.mkIf (user != null) {
-              ${user.name}.files = [
-                {
-                  file = ".zsh_history";
-                  mode = "0700";
-                }
-              ];
-            };
-          };
-        })
-      ];
-    };
-
     homeManager = {
       lib,
       pkgs,
@@ -45,6 +21,15 @@
           }
         ];
       };
+    };
+
+    preservation = {user}: {
+      preserve.users.${user.name}.files = [
+        {
+          file = ".zsh_history";
+          mode = "0700";
+        }
+      ];
     };
   };
 }

@@ -46,17 +46,17 @@
             persistentMountpoint = subVols.persistent.mountpoint;
           };
 
-          preservation.preserve.directories = [
-            "/var/lib/systemd"
-            "/var/lib/bluetooth"
-            "/var/lib/NetworkManager"
-            "/etc/NetworkManager/system-connections"
-
-            "/var/log"
-          ];
-
           system.stateVersion = "26.05";
         };
+
+        preservation.preserve.directories = [
+          "/var/lib/systemd"
+          "/var/lib/bluetooth"
+          "/var/lib/NetworkManager"
+          "/etc/NetworkManager/system-connections"
+
+          "/var/log"
+        ];
       });
 
     policies.igloo-to-tux = {

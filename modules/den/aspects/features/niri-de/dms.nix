@@ -1,8 +1,4 @@
-{
-  den,
-  inputs,
-  ...
-}: {
+{inputs, ...}: {
   flake-file.inputs = {
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/stable";
@@ -10,12 +6,7 @@
     };
   };
 
-  den.aspects.niri-de.dms = {
-    host,
-    user,
-  }: let
-    isEphemeralHost = host.hasAspect den.aspects.ephemeral-host;
-
+  den.aspects.niri-de.dms = let
     commonCfg = pkgs: {
       enable = true;
       enableVPN = true;
@@ -40,28 +31,11 @@
     }: {
       imports = [inputs.dms.nixosModules.dank-material-shell];
 
-      config = lib.mkMerge [
-        {
-          programs.dank-material-shell = lib.mkMerge [
-            (commonCfg pkgs)
-          ];
-
-          services.upower.enable = true;
-        }
-
-        (lib.mkIf isEphemeralHost {
-          preservation.preserve = {
-            users = lib.mkIf (user != null) {
-              ${user.name}.directories = [
-                {
-                  directory = ".local/state/DankMaterialShell";
-                  mode = "0700";
-                }
-              ];
-            };
-          };
-        })
+      programs.dank-material-shell = lib.mkMerge [
+        (commonCfg pkgs)
       ];
+
+      services.upower.enable = true;
     };
 
     homeManager = {
@@ -755,6 +729,15 @@
             fi
           done < <(find "$src" -type f -print0)
         '';
+    };
+
+    preservation = {user}: {
+      preserve.users.${user.name}.directories = [
+        {
+          directory = ".local/state/DankMaterialShell";
+          mode = "0700";
+        }
+      ];
     };
   };
 }

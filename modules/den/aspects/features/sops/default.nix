@@ -22,12 +22,7 @@
     };
   };
 
-  den.aspects.sops-nix = {
-    host,
-    user,
-  }: let
-    isEphemeralHost = host.hasAspect den.aspects.ephemeral-host;
-
+  den.aspects.sops-nix = let
     sshKeyType = "ed25519";
     sshHostKeyPath = "/etc/ssh/ssh_host_${sshKeyType}_key";
     sshUserKeyPath = ".ssh/id_${sshKeyType}";
@@ -38,6 +33,8 @@
       host,
       ...
     }: let
+      isEphemeralHost = host.hasAspect den.aspects.ephemeral-host;
+
       sshHostKeyPath' =
         if isEphemeralHost
         then "${config.ephemeral-host.persistentMountpoint}${sshHostKeyPath}"
@@ -45,52 +42,21 @@
     in {
       imports = [inputs.sops-nix.nixosModules.sops];
 
-      config = lib.mkMerge [
-        {
-          sops = {
-            defaultSopsFile = "${inputs.my-secrets}/secrets/sops/${host.name}.yaml";
-            age.sshKeyPaths = [sshHostKeyPath'];
-          };
+      sops = {
+        defaultSopsFile = "${inputs.my-secrets}/secrets/sops/${host.name}.yaml";
+        age.sshKeyPaths = [sshHostKeyPath'];
+      };
 
-          services.openssh = {
-            enable = true;
+      services.openssh = {
+        enable = true;
 
-            hostKeys = [
-              {
-                path = sshHostKeyPath';
-                type = sshKeyType;
-              }
-            ];
-          };
-        }
-
-        (lib.mkIf isEphemeralHost {
-          preservation.preserve = {
-            files = [
-              {
-                file = sshHostKeyPath;
-                how = "symlink";
-                configureParent = true;
-              }
-
-              {
-                file = "${sshHostKeyPath}.pub";
-                how = "symlink";
-                configureParent = true;
-              }
-            ];
-
-            users = lib.mkIf (user != null) {
-              ${user.name}.directories = [
-                {
-                  directory = ".ssh";
-                  mode = "0700";
-                }
-              ];
-            };
-          };
-        })
-      ];
+        hostKeys = [
+          {
+            path = sshHostKeyPath';
+            type = sshKeyType;
+          }
+        ];
+      };
     };
 
     darwin = {
@@ -107,9 +73,31 @@
 
       sops = {
         defaultSopsFile = "${inputs.my-secrets}/secrets/sops/${user.name}_${host.name}.yaml";
+        age.sshKeyPaths = ["${config.home.homeDirectory}/${sshUserKeyPath}"];
+      };
+    };
 
-        age.sshKeyPaths = [
-          "${config.home.homeDirectory}/${sshUserKeyPath}"
+    preservation = {user}: {
+      preserve = {
+        files = [
+          {
+            file = sshHostKeyPath;
+            how = "symlink";
+            configureParent = true;
+          }
+
+          {
+            file = "${sshHostKeyPath}.pub";
+            how = "symlink";
+            configureParent = true;
+          }
+        ];
+
+        users.${user.name}.directories = [
+          {
+            directory = ".ssh";
+            mode = "0700";
+          }
         ];
       };
     };
