@@ -25,6 +25,7 @@
           den.aspects.ephemeral-host
           den.aspects.sops-nix
           den.aspects.niri-de
+          den.aspects.sudo
         ];
 
         nixos = {
