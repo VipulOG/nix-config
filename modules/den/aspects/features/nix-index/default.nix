@@ -15,5 +15,14 @@
         nix-index-database.comma.enable = true;
       };
     };
+
+    preservation = {user}: {
+      preserve.users.${user.name}.directories = [
+        {
+          directory = ".cache/nix-index";
+          mode = "0700";
+        }
+      ];
+    };
   };
 }

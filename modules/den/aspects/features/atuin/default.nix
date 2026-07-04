@@ -44,6 +44,11 @@
           directory = ".local/share/atuin";
           mode = "0700";
         }
+
+        {
+          directory = ".atuin";
+          mode = "0700";
+        }
       ];
     };
   };

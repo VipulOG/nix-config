@@ -24,12 +24,22 @@
     };
 
     preservation = {user}: {
-      preserve.users.${user.name}.files = [
-        {
-          file = ".zsh_history";
-          mode = "0600";
-        }
-      ];
+      preserve.users.${user.name} = {
+        files = [
+          {
+            how = "symlink";
+            file = ".zsh_history";
+            mode = "0600";
+          }
+        ];
+
+        directories = [
+          {
+            directory = ".cache/fastfetch";
+            mode = "0700";
+          }
+        ];
+      };
     };
   };
 }

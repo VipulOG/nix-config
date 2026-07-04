@@ -40,5 +40,19 @@
         };
       };
     };
+
+    preservation = {user}: {
+      preserve.users.${user.name}.directories = [
+        {
+          directory = ".local/state/nix";
+          mode = "0700";
+        }
+
+        {
+          directory = ".cache/nix";
+          mode = "0700";
+        }
+      ];
+    };
   };
 }

@@ -734,7 +734,27 @@
     preservation = {user}: {
       preserve.users.${user.name}.directories = [
         {
+          directory = ".config/DankMaterialShell";
+          mode = "0700";
+        }
+
+        {
           directory = ".local/state/DankMaterialShell";
+          mode = "0700";
+        }
+
+        {
+          directory = ".cache/DankMaterialShell";
+          mode = "0700";
+        }
+
+        {
+          directory = ".cache/quickshell";
+          mode = "0700";
+        }
+
+        {
+          directory = ".local/share/color-schemes";
           mode = "0700";
         }
       ];

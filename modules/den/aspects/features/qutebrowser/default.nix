@@ -12,6 +12,11 @@
           directory = ".local/share/qutebrowser";
           mode = "0700";
         }
+
+        {
+          directory = ".cache/qutebrowser";
+          mode = "0700";
+        }
       ];
     };
   };

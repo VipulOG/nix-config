@@ -79,5 +79,14 @@
         };
       };
     };
+
+    preservation = {user}: {
+      preserve.users.${user.name}.directories = [
+        {
+          directory = ".cache/starship";
+          mode = "0700";
+        }
+      ];
+    };
   };
 }
