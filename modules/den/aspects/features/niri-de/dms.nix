@@ -111,7 +111,7 @@
             lockBeforeSuspend = true;
             terminalsAlwaysDark = true;
             notificationOverlayEnabled = true;
-            notificationPopupPrivacyMode = true;
+            notificationPopupPrivacyMode = false;
             lockScreenShowPowerActions = false;
             lockScreenShowSystemIcons = false;
             lockScreenShowTime = false;
