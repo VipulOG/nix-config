@@ -104,6 +104,53 @@
 
               open-focused = false;
             }
+
+            {
+              matches = [
+                {
+                  app-id = "Alacritty";
+                  at-startup = true;
+                }
+              ];
+
+              open-on-workspace = "1-dev";
+              default-column-width.proportion = 0.66666;
+            }
+
+            {
+              matches = [
+                {
+                  app-id = "^org.qutebrowser.qutebrowser$";
+                  at-startup = true;
+                }
+              ];
+
+              open-on-workspace = "1-dev";
+              open-focused = false;
+              default-column-width.proportion = 0.33333;
+            }
+
+            {
+              matches = [
+                {
+                  app-id = "^firefox$";
+                  at-startup = true;
+                }
+              ];
+
+              open-on-workspace = "2-web";
+            }
+          ];
+
+          workspaces = {
+            "1-dev" = {};
+            "2-web" = {};
+          };
+
+          spawn-at-startup = [
+            {argv = ["alacritty"];}
+            {argv = ["qutebrowser"];}
+            {argv = ["firefox"];}
           ];
         };
       };
