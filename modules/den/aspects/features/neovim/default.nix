@@ -4,6 +4,12 @@
   ...
 }: {
   den.aspects.neovim = {
+    nixos = {
+      environment.variables = {
+        EDITOR = "nvim";
+      };
+    };
+
     homeManager = {
       imports = [inputs.nvf.homeManagerModules.default];
 
@@ -13,6 +19,11 @@
         settings = {
           imports = [self.neovimModules.default];
         };
+      };
+
+      systemd.user.sessionVariables = {
+        EDITOR = "nvim";
+        VISUAL = "nvim";
       };
     };
 
