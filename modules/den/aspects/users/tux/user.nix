@@ -25,5 +25,9 @@
       den.aspects.chromium
       den.aspects.firefox
     ];
+
+    homeManager = {
+      home.file.".face".source = ./avatar.png;
+    };
   };
 }
