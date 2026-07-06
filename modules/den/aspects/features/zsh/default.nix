@@ -27,7 +27,7 @@
       preserve.users.${user.name}.files = [
         {
           file = ".zsh_history";
-          mode = "0700";
+          mode = "0600";
         }
       ];
     };
