@@ -86,10 +86,25 @@
         ];
 
         users.${user.name}.directories = [
-          "Documents"
-          "Pictures"
-          "Videos"
-          "Dev"
+          {
+            directory = "Documents";
+            mode = "0700";
+          }
+
+          {
+            directory = "Pictures";
+            mode = "0700";
+          }
+
+          {
+            directory = "Videos";
+            mode = "0700";
+          }
+
+          {
+            directory = "Dev";
+            mode = "0700";
+          }
         ];
       };
     };
