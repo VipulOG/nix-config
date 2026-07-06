@@ -5,3 +5,12 @@ window-rule {
         blur true
     }
 }
+
+window-rule {
+    match app-id="^org.qutebrowser.qutebrowser$"
+    opacity 0.9
+
+    background-effect {
+        blur true
+    }
+}
