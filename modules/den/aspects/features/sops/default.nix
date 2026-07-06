@@ -59,10 +59,6 @@
       };
     };
 
-    darwin = {
-      imports = [inputs.sops-nix.darwinModules.sops];
-    };
-
     homeManager = {
       config,
       host,
