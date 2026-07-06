@@ -624,7 +624,7 @@
             notificationTimeoutLow = 5000;
             notificationTimeoutNormal = 5000;
             notificationTimeoutCritical = 0;
-            notificationCompactMode = false;
+            notificationCompactMode = true;
             notificationDedupeEnabled = true;
             notificationAnimationSpeed = 1;
             notificationCustomAnimationDuration = 400;
