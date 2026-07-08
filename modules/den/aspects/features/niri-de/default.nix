@@ -3,8 +3,8 @@
     includes = with den.aspects.niri-de; [
       ly
       niri
-      alacritty
       dms
+      gtk
     ];
 
     homeManager = {pkgs, ...}: {

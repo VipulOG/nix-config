@@ -43,7 +43,7 @@
     };
     my-templates.url = "github:vipulog/nix-templates";
     niri = {
-      url = "github:sodiboo/niri-flake";
+      url = "git+https://codeberg.org/BANanaD3V/niri-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-index = {
