@@ -64,10 +64,7 @@
     };
     nvf = {
       url = "github:notashelf/nvf";
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     preservation.url = "github:nix-community/preservation";
     sops-nix = {
