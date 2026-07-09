@@ -17,7 +17,7 @@
         enable = true;
 
         settings = {
-          imports = [self.neovimModules.default];
+          imports = [self.nvfModules.default];
         };
       };
 

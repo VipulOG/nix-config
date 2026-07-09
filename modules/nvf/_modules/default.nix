@@ -5,6 +5,15 @@
   ];
 
   vim = {
+    keymaps = [
+      {
+        key = "-";
+        mode = "n";
+        action = "<cmd>Oil<CR>";
+        desc = "Open parent directory";
+      }
+    ];
+
     languages = {
       css.enable = true;
       go.enable = true;

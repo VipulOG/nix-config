@@ -11,7 +11,7 @@
     };
   };
 
-  flake.neovimModules = {
+  flake.nvfModules = {
     default = import ./_modules/default.nix;
     min = import ./_modules/min.nix;
     max = import ./_modules/max.nix;
@@ -23,12 +23,12 @@
     ...
   }: {
     packages = let
-      mkNeovimCfg = modName: (inputs.nvf.lib.neovimConfiguration {
+      mkNvfCfg = modName: (inputs.nvf.lib.neovimConfiguration {
         inherit pkgs;
-        modules = [self.neovimModules.${modName}];
+        modules = [self.nvfModules.${modName}];
       });
 
-      mkNeovim = modName: (mkNeovimCfg modName).neovim;
+      mkNeovim = modName: (mkNvfCfg modName).neovim;
     in {
       neovim-default = mkNeovim "default";
       neovim-min = mkNeovim "min";
