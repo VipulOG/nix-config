@@ -12,6 +12,7 @@
         den.aspects.igloo.disko
         den.aspects.ephemeral-host
         den.aspects.sudo
+        den.aspects.podman
       ];
 
       nixos = {config, ...}: {
