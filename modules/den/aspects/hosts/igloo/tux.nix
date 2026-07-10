@@ -1,5 +1,7 @@
-{
+{den, ...}: {
   den.aspects.igloo.tux = {
+    includes = [den.aspects.igloo.tux.syncthing];
+
     nixos = {
       sops.secrets.tux-password = {
         neededForUsers = true;
@@ -12,6 +14,20 @@
 
     homeManager = {
       home.stateVersion = "26.05";
+    };
+
+    persist = {
+      preserve.users.tux.directories = [
+        {
+          directory = "DCIM";
+          mode = "0700";
+        }
+
+        {
+          directory = "Recordings";
+          mode = "0700";
+        }
+      ];
     };
   };
 }
