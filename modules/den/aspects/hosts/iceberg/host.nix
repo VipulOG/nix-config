@@ -54,37 +54,18 @@
       host,
       user,
       ...
-    }: let
-      guard = host.name == "iceberg";
-    in
-      lib.optional guard (den.lib.policy.include {
-        includes = [
-          den.aspects.sops-nix
-          den.aspects.niri-de
-        ];
-      });
+    }:
+      lib.optional
+      (host.name == "iceberg" && user != null)
+      (den.lib.policy.include den.aspects.iceberg.users);
 
     policies.iceberg-to-tux = {
       host,
       user,
       ...
-    }: let
-      guard = host.name == "iceberg" && user.name == "tux";
-    in
-      lib.optional guard (den.lib.policy.include {
-        nixos = {
-          sops.secrets.tux-password = {
-            neededForUsers = true;
-          };
-        };
-
-        user = {config, ...}: {
-          hashedPasswordFile = config.sops.secrets.tux-password.path;
-        };
-
-        homeManager = {
-          home.stateVersion = "26.05";
-        };
-      });
+    }:
+      lib.optional
+      (host.name == "iceberg" && user.name == "tux")
+      (den.lib.policy.include den.aspects.iceberg.users.tux);
   };
 }
