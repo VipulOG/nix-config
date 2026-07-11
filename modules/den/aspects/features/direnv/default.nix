@@ -1,5 +1,5 @@
 {
-  den.aspects.direnv = {
+  den.aspects.direnv = {user}: {
     homeManager = {
       programs.direnv = {
         enable = true;
@@ -7,7 +7,7 @@
       };
     };
 
-    preservation = {user}: {
+    preservation = {
       preserve.users.${user.name}.directories = [
         {
           directory = ".local/share/direnv";

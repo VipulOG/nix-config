@@ -1,5 +1,5 @@
 {
-  den.aspects.zsh = {
+  den.aspects.zsh = {user}: {
     homeManager = {
       lib,
       pkgs,
@@ -23,7 +23,7 @@
       };
     };
 
-    preservation = {user}: {
+    preservation = {
       preserve.users.${user.name} = {
         files = [
           {

@@ -5,7 +5,7 @@
     };
   };
 
-  den.aspects.nix = {
+  den.aspects.nix = {user}: {
     nixos = {
       nix = {
         settings = {
@@ -41,7 +41,7 @@
       };
     };
 
-    preservation = {user}: {
+    preservation = {
       preserve.users.${user.name}.directories = [
         {
           directory = ".local/state/nix";

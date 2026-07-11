@@ -1,5 +1,5 @@
 {
-  den.aspects.atuin = {
+  den.aspects.atuin = {user}: {
     homeManager = {
       config = {
         programs.atuin = {
@@ -38,7 +38,7 @@
       };
     };
 
-    preservation = {user}: {
+    preservation = {
       preserve.users.${user.name}.directories = [
         {
           directory = ".local/share/atuin";

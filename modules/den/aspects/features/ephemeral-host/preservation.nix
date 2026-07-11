@@ -1,23 +1,9 @@
-{
-  den,
-  lib,
-  inputs,
-  ...
-}: {
+{inputs, ...}: {
   flake-file.inputs = {
     preservation.url = "github:nix-community/preservation";
   };
 
-  den.aspects.ephemeral-host.preservation = let
-    preservationFwd = den.batteries.forward {
-      each = lib.singleton true;
-      fromClass = _item: "preservation";
-      intoClass = _item: "nixos";
-      intoPath = _item: ["preservation"];
-    };
-  in {
-    includes = [preservationFwd];
-
+  den.aspects.ephemeral-host.preservation = {user}: {
     nixos = {
       lib,
       config,
@@ -66,7 +52,7 @@
       };
     };
 
-    preservation = {user}: {
+    preservation = {
       preserve = {
         directories = [
           {

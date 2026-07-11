@@ -22,7 +22,7 @@
     };
   };
 
-  den.aspects.sops-nix = let
+  den.aspects.sops-nix = {user}: let
     sshKeyType = "ed25519";
     sshHostKeyPath = "/etc/ssh/ssh_host_${sshKeyType}_key";
     sshUserKeyPath = ".ssh/id_${sshKeyType}";
@@ -73,7 +73,7 @@
       };
     };
 
-    preservation = {user}: {
+    preservation = {
       preserve = {
         files = [
           {

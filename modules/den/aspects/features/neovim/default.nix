@@ -3,7 +3,7 @@
   self,
   ...
 }: {
-  den.aspects.neovim = {
+  den.aspects.neovim = {user}: {
     nixos = {
       environment.variables = {
         EDITOR = "nvim";
@@ -27,7 +27,7 @@
       };
     };
 
-    preservation = {user}: {
+    preservation = {
       preserve.users.${user.name}.directories = [
         {
           directory = ".local/share/nvf";

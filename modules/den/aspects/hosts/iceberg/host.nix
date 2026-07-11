@@ -10,6 +10,7 @@
         den.policies.iceberg-to-tux
         den.aspects.iceberg.hardware
         den.aspects.iceberg.disko
+        den.aspects.ephemeral-host
       ];
     };
 
@@ -22,7 +23,6 @@
     in
       lib.optional guard (den.lib.policy.include {
         includes = [
-          den.aspects.ephemeral-host
           den.aspects.sops-nix
           den.aspects.niri-de
           den.aspects.sudo

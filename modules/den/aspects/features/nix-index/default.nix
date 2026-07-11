@@ -6,7 +6,7 @@
     };
   };
 
-  den.aspects.nix-index = {
+  den.aspects.nix-index = {user}: {
     homeManager = {
       imports = [inputs.nix-index.homeModules.nix-index];
 
@@ -16,7 +16,7 @@
       };
     };
 
-    preservation = {user}: {
+    preservation = {
       preserve.users.${user.name}.directories = [
         {
           directory = ".cache/nix-index";
