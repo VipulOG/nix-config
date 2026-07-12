@@ -78,6 +78,11 @@
           }
 
           {
+            directory = "Music";
+            mode = "0700";
+          }
+
+          {
             directory = "Pictures";
             mode = "0700";
           }
