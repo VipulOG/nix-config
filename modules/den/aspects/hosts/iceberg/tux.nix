@@ -1,5 +1,5 @@
 {
-  den.aspects.igloo.users.tux = {
+  den.aspects.iceberg.tux = {
     nixos = {
       sops.secrets.tux-password = {
         neededForUsers = true;

@@ -26,6 +26,9 @@
       ];
     };
 
-    schema.user.classes = lib.mkDefault ["homeManager"];
+    schema.user = {
+      includes = [den.batteries.host-aspects];
+      classes = lib.mkDefault ["homeManager"];
+    };
   };
 }

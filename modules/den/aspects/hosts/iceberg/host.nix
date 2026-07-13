@@ -1,18 +1,14 @@
-{
-  den,
-  lib,
-  ...
-}: {
+{den, ...}: {
   den = {
     aspects.iceberg = {
       includes = [
-        den.policies.iceberg-to-users
-        den.policies.iceberg-to-tux
         den.aspects.iceberg.hardware
         den.aspects.iceberg.disko
         den.aspects.ephemeral-host
+        den.aspects.sops-nix
         den.aspects.sudo
         den.aspects.podman
+        den.aspects.niri-de
       ];
 
       nixos = {
@@ -50,23 +46,5 @@
         "/var/log"
       ];
     };
-
-    policies.iceberg-to-users = {
-      host,
-      user,
-      ...
-    }:
-      lib.optional
-      (host.name == "iceberg" && user != null)
-      (den.lib.policy.include den.aspects.iceberg.users);
-
-    policies.iceberg-to-tux = {
-      host,
-      user,
-      ...
-    }:
-      lib.optional
-      (host.name == "iceberg" && user.name == "tux")
-      (den.lib.policy.include den.aspects.iceberg.users.tux);
   };
 }

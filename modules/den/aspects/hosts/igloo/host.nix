@@ -1,18 +1,14 @@
-{
-  den,
-  lib,
-  ...
-}: {
+{den, ...}: {
   den = {
     aspects.igloo = {
       includes = [
-        den.policies.igloo-to-users
-        den.policies.igloo-to-tux
         den.aspects.igloo.hardware
         den.aspects.igloo.disko
         den.aspects.ephemeral-host
+        den.aspects.sops-nix
         den.aspects.sudo
         den.aspects.podman
+        den.aspects.niri-de
       ];
 
       nixos = {config, ...}: {
@@ -46,23 +42,5 @@
         "/var/log"
       ];
     };
-
-    policies.igloo-to-users = {
-      host,
-      user,
-      ...
-    }:
-      lib.optional
-      (host.name == "igloo" && user != null)
-      (den.lib.policy.include den.aspects.igloo.users);
-
-    policies.igloo-to-tux = {
-      host,
-      user,
-      ...
-    }:
-      lib.optional
-      (host.name == "igloo" && user.name == "tux")
-      (den.lib.policy.include den.aspects.igloo.users.tux);
   };
 }
