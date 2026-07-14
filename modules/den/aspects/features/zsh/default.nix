@@ -23,7 +23,7 @@
       };
     };
 
-    preservation = {
+    persist = {
       preserve.users.${user.name} = {
         files = [
           {

@@ -38,7 +38,7 @@
         system.stateVersion = "26.05";
       };
 
-      preservation.preserve.directories = [
+      persist.preserve.directories = [
         "/var/lib/systemd"
         "/var/lib/NetworkManager"
         "/etc/NetworkManager/system-connections"

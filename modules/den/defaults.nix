@@ -11,14 +11,7 @@
       ];
     };
 
-    schema = let
-      preservationFwd = den.batteries.forward {
-        each = lib.singleton true;
-        fromClass = _item: "preservation";
-        intoClass = _item: "nixos";
-        intoPath = _item: ["preservation"];
-      };
-    in {
+    schema = {
       host = {
         includes = [
           den.batteries.hostname
@@ -26,19 +19,29 @@
           den.aspects.home-manager
           den.aspects.nur
           den.aspects.localization
-
-          preservationFwd
         ];
       };
 
       user = {
         includes = [
           den.batteries.host-aspects
-          preservationFwd
+          den.policies.expose-persist
         ];
 
         classes = lib.mkDefault ["homeManager"];
       };
+    };
+
+    quirks = {
+      persist = {
+        description = "Preservation config contributed by aspects";
+      };
+    };
+
+    policies = {
+      expose-persist = {user, ...}: let
+        inherit (den.lib.policy) pipe;
+      in [(pipe.from "persist" [pipe.expose])];
     };
   };
 }

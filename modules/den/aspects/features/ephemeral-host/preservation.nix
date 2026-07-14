@@ -8,6 +8,7 @@
       lib,
       config,
       options,
+      persist,
       ...
     }: let
       hostCfg = config.ephemeral-host;
@@ -29,14 +30,18 @@
       };
 
       config = lib.mkIf hostCfg.enable {
-        preservation = {
-          enable = true;
+        preservation = lib.mkMerge (
+          [
+            {
+              enable = true;
+              preserve.persistentStoragePath = defaultPreserveAt;
 
-          preserveAt.${defaultPreserveAt} =
-            lib.mkAliasDefinitions options.preservation.preserve;
-
-          preserve.persistentStoragePath = defaultPreserveAt;
-        };
+              preserveAt.${defaultPreserveAt} =
+                lib.mkAliasDefinitions options.preservation.preserve;
+            }
+          ]
+          ++ persist
+        );
 
         systemd.services.systemd-machine-id-commit = {
           unitConfig.ConditionPathIsMountPoint = [
@@ -52,7 +57,7 @@
       };
     };
 
-    preservation = {
+    persist = {
       preserve = {
         directories = [
           {

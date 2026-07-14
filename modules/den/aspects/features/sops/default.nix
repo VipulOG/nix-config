@@ -73,7 +73,7 @@
       };
     };
 
-    preservation = {
+    persist = {
       preserve = {
         files = [
           {

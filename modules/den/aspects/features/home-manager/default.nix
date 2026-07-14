@@ -8,7 +8,7 @@
       };
     };
 
-    preservation = {
+    persist = {
       preserve.users.${user.name}.directories = [
         {
           directory = ".local/state/home-manager";

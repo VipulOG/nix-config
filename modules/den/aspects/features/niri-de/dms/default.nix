@@ -50,7 +50,7 @@
       };
     };
 
-    preservation = {
+    persist = {
       preserve.users.${user.name}.directories = [
         {
           directory = ".config/DankMaterialShell";

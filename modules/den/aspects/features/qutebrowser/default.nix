@@ -6,7 +6,7 @@
       };
     };
 
-    preservation = {
+    persist = {
       preserve.users.${user.name}.directories = [
         {
           directory = ".local/share/qutebrowser";
