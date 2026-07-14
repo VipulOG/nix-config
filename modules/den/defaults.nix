@@ -4,7 +4,14 @@
   ...
 }: {
   den = {
-    default = let
+    default = {
+      includes = [
+        den.batteries.inputs'
+        den.batteries.self'
+      ];
+    };
+
+    schema = let
       preservationFwd = den.batteries.forward {
         each = lib.singleton true;
         fromClass = _item: "preservation";
@@ -12,23 +19,26 @@
         intoPath = _item: ["preservation"];
       };
     in {
-      includes = [
-        den.batteries.hostname
-        den.batteries.inputs'
-        den.batteries.self'
+      host = {
+        includes = [
+          den.batteries.hostname
+          den.aspects.nix
+          den.aspects.home-manager
+          den.aspects.nur
+          den.aspects.localization
 
-        den.aspects.nix
-        den.aspects.home-manager
-        den.aspects.nur
-        den.aspects.localization
+          preservationFwd
+        ];
+      };
 
-        preservationFwd
-      ];
-    };
+      user = {
+        includes = [
+          den.batteries.host-aspects
+          preservationFwd
+        ];
 
-    schema.user = {
-      includes = [den.batteries.host-aspects];
-      classes = lib.mkDefault ["homeManager"];
+        classes = lib.mkDefault ["homeManager"];
+      };
     };
   };
 }
