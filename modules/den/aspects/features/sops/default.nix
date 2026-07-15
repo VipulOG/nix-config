@@ -1,6 +1,7 @@
 {
-  inputs,
   den,
+  lib,
+  inputs,
   ...
 }: {
   flake-file.inputs = {
@@ -22,29 +23,63 @@
     };
   };
 
-  den.aspects.sops-nix = {user}: let
-    sshKeyType = "ed25519";
-    sshHostKeyPath = "/etc/ssh/ssh_host_${sshKeyType}_key";
-    sshUserKeyPath = ".ssh/id_${sshKeyType}";
+  den.aspects.sops-nix = {
+    host,
+    user,
+  }: let
+    secretsDir = "${inputs.my-secrets}/secrets/sops";
+    isEphemeralHost = host.hasAspect den.aspects.ephemeral-host;
+
+    sshHostKeyPath = "/etc/ssh/id_${host.name}";
+    sshUserKeyPath = ".ssh/id_${user.name}";
+    sshHostUserKeyPath = ".ssh/id_${host.name}_${user.name}";
+
+    joinPath = segments: let
+      trimmed = map (s: lib.removeSuffix "/" (lib.removePrefix "/" s)) segments;
+      nonEmpty = builtins.filter (s: s != "") trimmed;
+    in
+      "/" + lib.concatStringsSep "/" nonEmpty;
+
+    resolveKeyPaths = {
+      persistPoint,
+      homePath,
+    }: {
+      sshHostKeyPath =
+        if isEphemeralHost
+        then joinPath [persistPoint sshHostKeyPath]
+        else sshHostKeyPath;
+
+      sshUserKeyPath =
+        if isEphemeralHost
+        then joinPath [persistPoint homePath sshUserKeyPath]
+        else joinPath [homePath sshUserKeyPath];
+
+      sshHostUserKeyPath =
+        if isEphemeralHost
+        then joinPath [persistPoint homePath sshHostUserKeyPath]
+        else joinPath [homePath sshHostUserKeyPath];
+    };
   in {
     nixos = {
       lib,
       config,
-      host,
       ...
     }: let
-      isEphemeralHost = host.hasAspect den.aspects.ephemeral-host;
-
-      sshHostKeyPath' =
-        if isEphemeralHost
-        then "${config.ephemeral-host.persistentMountpoint}${sshHostKeyPath}"
-        else sshHostKeyPath;
+      resolved = resolveKeyPaths {
+        persistPoint = config.ephemeral-host.persistentMountpoint;
+        homePath = config.users.users.${user.name}.home;
+      };
     in {
       imports = [inputs.sops-nix.nixosModules.sops];
 
       sops = {
-        defaultSopsFile = "${inputs.my-secrets}/secrets/sops/${host.name}.yaml";
-        age.sshKeyPaths = [sshHostKeyPath'];
+        defaultSopsFile = "${secretsDir}/${host.name}.yaml";
+
+        age.sshKeyPaths = [
+          resolved.sshHostKeyPath
+          resolved.sshUserKeyPath
+          resolved.sshHostUserKeyPath
+        ];
       };
 
       services.openssh = {
@@ -52,24 +87,34 @@
 
         hostKeys = [
           {
-            path = sshHostKeyPath';
-            type = sshKeyType;
+            path = resolved.sshHostKeyPath;
+            type = "ed25519";
           }
         ];
       };
     };
 
     homeManager = {
+      lib,
       config,
-      host,
-      user,
+      osConfig,
       ...
-    }: {
+    }: let
+      resolved = resolveKeyPaths {
+        persistPoint = osConfig.ephemeral-host.persistentMountpoint;
+        homePath = config.home.homeDirectory;
+      };
+    in {
       imports = [inputs.sops-nix.homeManagerModules.sops];
 
       sops = {
-        defaultSopsFile = "${inputs.my-secrets}/secrets/sops/${user.name}_${host.name}.yaml";
-        age.sshKeyPaths = ["${config.home.homeDirectory}/${sshUserKeyPath}"];
+        defaultSopsFile = "${secretsDir}/${user.name}_${host.name}.yaml";
+
+        age.sshKeyPaths = [
+          resolved.sshHostKeyPath
+          resolved.sshUserKeyPath
+          resolved.sshHostUserKeyPath
+        ];
       };
     };
 
