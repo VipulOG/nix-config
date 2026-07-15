@@ -250,11 +250,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782562530,
-        "narHash": "sha256-FVjIBnehuyt/pixa8m1V4eyzBAcCXMafwNSIzrG99Ao=",
+        "lastModified": 1784186811,
+        "narHash": "sha256-zWPRIDQcLH/OPbHLQNoTWIovEgquvdCWbcyjASFJcsU=",
         "owner": "vipulog",
         "repo": "nix-secrets",
-        "rev": "b557a7710874668eb60a652036c32fa007f1aa51",
+        "rev": "82ce30ccfe47c043b7c8496fff1914ed04d2f2ff",
         "type": "github"
       },
       "original": {
