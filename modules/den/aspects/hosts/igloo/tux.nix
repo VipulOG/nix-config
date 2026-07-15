@@ -1,6 +1,9 @@
 {den, ...}: {
   den.aspects.igloo.tux = {
-    includes = [den.aspects.igloo.tux.syncthing];
+    includes = [
+      den.aspects.igloo.tux.syncthing
+      den.aspects.igloo.tux.restic
+    ];
 
     nixos = {
       sops.secrets.tux-password = {
