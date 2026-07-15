@@ -1,8 +1,6 @@
 {inputs, ...}: {
   flake-file.inputs = {
-    my-templates = {
-      url = "github:vipulog/nix-templates";
-    };
+    my-templates.url = "github:vipulog/nix-templates";
   };
 
   den.aspects.nix = {user}: {

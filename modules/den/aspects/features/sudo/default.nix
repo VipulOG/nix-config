@@ -4,8 +4,10 @@
       security.sudo.enable = true;
     };
 
-    persist.preserve.directories = [
-      "/var/db/sudo"
-    ];
+    persist = {
+      preserve.directories = [
+        "/var/db/sudo"
+      ];
+    };
   };
 }
