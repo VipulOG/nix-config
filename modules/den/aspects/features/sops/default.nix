@@ -32,7 +32,7 @@
 
     sshHostKeyPath = "/etc/ssh/id_${host.name}";
     sshUserKeyPath = ".ssh/id_${user.name}";
-    sshHostUserKeyPath = ".ssh/id_${host.name}_${user.name}";
+    sshUserHostKeyPath = ".ssh/id_${user.name}_${host.name}";
 
     joinPath = segments: let
       trimmed = map (s: lib.removeSuffix "/" (lib.removePrefix "/" s)) segments;
@@ -54,10 +54,10 @@
         then joinPath [persistPoint homePath sshUserKeyPath]
         else joinPath [homePath sshUserKeyPath];
 
-      sshHostUserKeyPath =
+      sshUserHostKeyPath =
         if isEphemeralHost
-        then joinPath [persistPoint homePath sshHostUserKeyPath]
-        else joinPath [homePath sshHostUserKeyPath];
+        then joinPath [persistPoint homePath sshUserHostKeyPath]
+        else joinPath [homePath sshUserHostKeyPath];
     };
   in {
     nixos = {
@@ -78,7 +78,7 @@
         age.sshKeyPaths = [
           resolved.sshHostKeyPath
           resolved.sshUserKeyPath
-          resolved.sshHostUserKeyPath
+          resolved.sshUserHostKeyPath
         ];
       };
 
@@ -113,7 +113,7 @@
         age.sshKeyPaths = [
           resolved.sshHostKeyPath
           resolved.sshUserKeyPath
-          resolved.sshHostUserKeyPath
+          resolved.sshUserHostKeyPath
         ];
       };
     };
