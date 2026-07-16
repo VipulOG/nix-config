@@ -6,8 +6,8 @@
         enableDefaultConfig = false;
 
         settings."*" = {
-          addKeysToAgent = "yes";
-          forwardAgent = true;
+          AddKeysToAgent = "yes";
+          ForwardAgent = "yes";
         };
       };
     };
