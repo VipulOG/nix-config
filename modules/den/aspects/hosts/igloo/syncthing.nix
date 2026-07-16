@@ -45,10 +45,7 @@
 
     persist = {
       preserve.users.tux.directories = [
-        {
-          directory = ".config/syncthing";
-          mode = "0700";
-        }
+        ".config/syncthing"
       ];
     };
   };

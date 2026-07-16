@@ -9,10 +9,7 @@
 
     persist = {
       preserve.users.${user.name}.directories = [
-        {
-          directory = ".local/share/zoxide";
-          mode = "0700";
-        }
+        ".local/share/zoxide"
       ];
     };
   };

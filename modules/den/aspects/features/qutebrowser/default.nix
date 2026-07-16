@@ -8,15 +8,8 @@
 
     persist = {
       preserve.users.${user.name}.directories = [
-        {
-          directory = ".local/share/qutebrowser";
-          mode = "0700";
-        }
-
-        {
-          directory = ".cache/qutebrowser";
-          mode = "0700";
-        }
+        ".local/share/qutebrowser"
+        ".cache/qutebrowser"
       ];
     };
   };

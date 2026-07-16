@@ -8,10 +8,7 @@
 
     persist = {
       preserve.users.${user.name}.directories = [
-        {
-          directory = ".cache/bat";
-          mode = "0700";
-        }
+        ".cache/bat"
       ];
     };
   };

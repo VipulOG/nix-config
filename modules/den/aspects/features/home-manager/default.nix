@@ -10,10 +10,7 @@
 
     persist = {
       preserve.users.${user.name}.directories = [
-        {
-          directory = ".local/state/home-manager";
-          mode = "0700";
-        }
+        ".local/state/home-manager"
       ];
     };
   };

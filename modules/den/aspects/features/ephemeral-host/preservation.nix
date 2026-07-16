@@ -77,35 +77,13 @@
         ];
 
         users.${user.name}.directories = [
-          {
-            directory = "Documents";
-            mode = "0700";
-          }
+          "Documents"
+          "Music"
+          "Pictures"
+          "Videos"
+          "Dev"
 
-          {
-            directory = "Music";
-            mode = "0700";
-          }
-
-          {
-            directory = "Pictures";
-            mode = "0700";
-          }
-
-          {
-            directory = "Videos";
-            mode = "0700";
-          }
-
-          {
-            directory = "Dev";
-            mode = "0700";
-          }
-
-          {
-            directory = ".cache/mesa_shader_cache";
-            mode = "0700";
-          }
+          ".cache/mesa_shader_cache"
         ];
       };
     };

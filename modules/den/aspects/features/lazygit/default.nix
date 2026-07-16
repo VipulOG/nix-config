@@ -19,10 +19,7 @@
 
     persist = {
       preserve.users.${user.name}.directories = [
-        {
-          directory = ".local/state/lazygit";
-          mode = "0700";
-        }
+        ".local/state/lazygit"
       ];
     };
   };

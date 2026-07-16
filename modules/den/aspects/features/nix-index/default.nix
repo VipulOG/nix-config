@@ -18,10 +18,7 @@
 
     persist = {
       preserve.users.${user.name}.directories = [
-        {
-          directory = ".cache/nix-index";
-          mode = "0700";
-        }
+        ".cache/nix-index"
       ];
     };
   };

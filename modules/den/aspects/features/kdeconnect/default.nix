@@ -23,10 +23,7 @@
 
     persist = {
       preserve.users.${user.name}.directories = [
-        {
-          directory = ".config/kdeconnect";
-          mode = "0700";
-        }
+        ".config/kdeconnect"
       ];
     };
   };

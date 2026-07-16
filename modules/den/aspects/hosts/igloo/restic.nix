@@ -65,10 +65,7 @@
 
     persist = {
       preserve.users.tux.directories = [
-        {
-          directory = ".cache/restic-backups-b2";
-          mode = "0700";
-        }
+        ".cache/restic-backups-b2"
       ];
     };
   };

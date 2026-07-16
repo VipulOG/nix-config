@@ -21,15 +21,8 @@
 
     persist = {
       preserve.users.tux.directories = [
-        {
-          directory = "DCIM";
-          mode = "0700";
-        }
-
-        {
-          directory = "Recordings";
-          mode = "0700";
-        }
+        "DCIM"
+        "Recordings"
       ];
     };
   };

@@ -33,12 +33,7 @@
           }
         ];
 
-        directories = [
-          {
-            directory = ".cache/fastfetch";
-            mode = "0700";
-          }
-        ];
+        directories = [".cache/fastfetch"];
       };
     };
   };

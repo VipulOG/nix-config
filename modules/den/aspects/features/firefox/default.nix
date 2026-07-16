@@ -48,15 +48,8 @@
 
     persist = {
       preserve.users.${user.name}.directories = [
-        {
-          directory = ".config/mozilla";
-          mode = "0700";
-        }
-
-        {
-          directory = ".cache/mozilla";
-          mode = "0700";
-        }
+        ".config/mozilla"
+        ".cache/mozilla"
       ];
     };
   };

@@ -38,15 +38,8 @@
 
     persist = {
       preserve.users.${user.name}.directories = [
-        {
-          directory = ".local/share/atuin";
-          mode = "0700";
-        }
-
-        {
-          directory = ".atuin";
-          mode = "0700";
-        }
+        ".local/share/atuin"
+        ".atuin"
       ];
     };
   };
