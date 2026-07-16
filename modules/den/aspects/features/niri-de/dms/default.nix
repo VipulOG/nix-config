@@ -24,8 +24,9 @@
 
       programs.dank-material-shell = {
         enable = true;
-
+        package = pkgs.dms-shell;
         quickshell.package = pkgs.quickshell;
+        dgop.package = pkgs.dgop;
 
         enableVPN = true;
         enableCalendarEvents = true;
@@ -46,7 +47,9 @@
 
       programs.dank-material-shell = {
         enable = true;
+        package = pkgs.dms-shell;
         quickshell.package = pkgs.quickshell;
+        dgop.package = pkgs.dgop;
       };
     };
 
