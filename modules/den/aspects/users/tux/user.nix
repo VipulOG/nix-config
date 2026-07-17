@@ -20,6 +20,7 @@
       den.aspects.starship
       den.aspects.btop
       den.aspects.nix-index
+      den.aspects.antigravity-cli
 
       den.aspects.qutebrowser
       den.aspects.chromium
