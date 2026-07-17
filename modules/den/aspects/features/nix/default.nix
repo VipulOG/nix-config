@@ -15,6 +15,11 @@
           min-free = 128000000;
           max-free = 1000000000;
 
+          trusted-users = [
+            "root"
+            "@wheel"
+          ];
+
           substituters = [
             "https://cache.nixos.org/"
             "https://nix-community.cachix.org"
