@@ -25,6 +25,7 @@
       den.aspects.qutebrowser
       den.aspects.chromium
       den.aspects.firefox
+      den.aspects.redirector
 
       den.aspects.kdeconnect
     ];
