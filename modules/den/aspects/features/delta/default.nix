@@ -1,10 +1,10 @@
-{den, ...}: {
+{
   den.aspects.delta = {
-    homeManager = {user, ...}: {
+    homeManager = {config, ...}: {
       programs.delta = {
         enable = true;
-        enableGitIntegration = user.hasAspect den.aspects.git;
-        enableJujutsuIntegration = user.hasAspect den.aspects.jujutsu;
+        enableGitIntegration = config.programs.git.enable;
+        enableJujutsuIntegration = config.programs.jujutsu.enable;
 
         options = {
           diff-so-fancy = true;
