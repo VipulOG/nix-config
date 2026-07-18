@@ -9,6 +9,10 @@
       sops.secrets.tux-password = {
         neededForUsers = true;
       };
+
+      services.tailscale.extraSetFlags = [
+        "--operator=tux"
+      ];
     };
 
     user = {config, ...}: {

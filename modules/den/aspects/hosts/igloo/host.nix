@@ -9,6 +9,7 @@
       den.aspects.sudo
       den.aspects.podman
       den.aspects.niri-de
+      den.aspects.tailscale
     ];
 
     nixos = {config, ...}: {
