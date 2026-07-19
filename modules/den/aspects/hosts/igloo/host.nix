@@ -22,7 +22,6 @@
 
       hardware.bluetooth.enable = true;
       networking.networkmanager.enable = true;
-      services.blueman.enable = true;
 
       ephemeral-host = let
         mainDiskCfg = config.disko.devices.disk.main;
