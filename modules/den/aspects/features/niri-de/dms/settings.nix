@@ -82,7 +82,7 @@
               ];
 
               rightWidgets = [
-                # "systemTray"
+                "systemTray"
                 # "clipboard"
                 "cpuUsage"
                 "memUsage"
