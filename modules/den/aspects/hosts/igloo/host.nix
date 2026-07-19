@@ -7,6 +7,7 @@
       den.aspects.ephemeral-host
       den.aspects.sops-nix
       den.aspects.sudo
+      den.aspects.polkit
       den.aspects.podman
       den.aspects.niri-de
       den.aspects.tailscale
