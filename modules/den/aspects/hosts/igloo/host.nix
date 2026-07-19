@@ -11,6 +11,7 @@
       den.aspects.podman
       den.aspects.niri-de
       den.aspects.tailscale
+      den.aspects.waydroid
     ];
 
     nixos = {config, ...}: {
