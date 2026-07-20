@@ -1,5 +1,5 @@
 {den, ...}: {
-  den.aspects.antigravity-cli = {
+  den.aspects.antigravity-cli = {user}: {
     includes = [den.aspects.mcp];
 
     homeManager = {
@@ -51,6 +51,12 @@
           '';
         };
       };
+    };
+
+    persist = {
+      preserve.users.${user.name}.directories = [
+        ".gemini"
+      ];
     };
   };
 }
