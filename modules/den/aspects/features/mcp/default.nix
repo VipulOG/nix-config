@@ -13,25 +13,25 @@
       (policy.when hasSops (policy.include den.aspects.mcp.secrets))
     ];
 
-    homeManager = {
-      pkgs,
-      config,
-      ...
-    }: {
-      home.packages = [pkgs.nodejs_26];
-
+    homeManager = {pkgs, ...}: let
+      mcpRemote = pkgs.writeShellApplication {
+        name = "mcp-remote";
+        runtimeInputs = [pkgs.nodejs_26];
+        text = "exec npx -y mcp-remote \"$@\"";
+      };
+    in {
       programs.mcp = {
         enable = true;
 
         servers = {
           deepwiki = {
-            command = "npx";
-            args = ["-y" "mcp-remote" "https://mcp.deepwiki.com/mcp"];
+            command = "${mcpRemote}/bin/mcp-remote";
+            args = ["https://mcp.deepwiki.com/mcp"];
           };
 
           github = {
-            command = "npx";
-            args = ["-y" "mcp-remote" "https://api.githubcopilot.com/mcp"];
+            command = "${mcpRemote}/bin/mcp-remote";
+            args = ["https://api.githubcopilot.com/mcp"];
           };
         };
       };
