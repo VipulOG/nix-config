@@ -28,6 +28,14 @@
 
     window-rule {
         match app-id="Alacritty" at-startup=true
+        open-on-workspace "1-dev"
+        open-focused false
+        open-maximized true
+    }
+
+    /*
+    window-rule {
+        match app-id="Alacritty" at-startup=true
         default-column-width { proportion 0.666; }
         open-on-workspace "1-dev"
         open-focused false
@@ -39,6 +47,7 @@
         open-on-workspace "1-dev"
         open-focused false
     }
+    */
 
     window-rule {
         match app-id="firefox$" at-startup=true
@@ -46,14 +55,16 @@
         open-focused false
     }
 
+    /*
     window-rule {
         match app-id="^org.qutebrowser.qutebrowser$"
         opacity 0.9
     }
+    */
 
     window-rule {
         match app-id="Alacritty"
-        match app-id="^org.qutebrowser.qutebrowser$"
+        // match app-id="^org.qutebrowser.qutebrowser$"
         background-effect { blur true; }
     }
   '';

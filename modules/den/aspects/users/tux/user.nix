@@ -22,7 +22,7 @@
       den.aspects.nix-index
       den.aspects.antigravity-cli
 
-      den.aspects.qutebrowser
+      # den.aspects.qutebrowser
       den.aspects.chromium
       den.aspects.firefox
       den.aspects.redirector
