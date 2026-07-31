@@ -48,6 +48,7 @@
           ];
 
           exclude = [
+            "**/.stversions"
             "**/node_modules"
             "**/.venv"
             "**/venv"
