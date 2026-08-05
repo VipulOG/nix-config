@@ -3,25 +3,74 @@
     homeManager = {config, ...}: {
       programs.dank-material-shell = {
         settings = {
+          currentThemeCategory = "dynamic";
+          currentThemeName = "dynamic";
+          matugenScheme = "scheme-content";
+          gtkThemingEnabled = true;
+
+          blurEnabled = true;
+          cornerRadius = 8;
+          launcherLogoMode = "os";
+          clockCompactMode = true;
+          niriLayoutGapsOverride = 8;
+          osdPowerProfileEnabled = true;
+          popupTransparency = 0.9;
+          terminalsAlwaysDark = true;
+          updaterHideWidget = true;
+          useAutoLocation = true;
+
+          lockBeforeSuspend = true;
+          lockScreenPowerOffMonitorsOnLock = true;
+          lockScreenShowDate = false;
+          lockScreenShowPowerActions = false;
+          lockScreenShowSystemIcons = false;
+          lockScreenShowTime = false;
+
+          notificationCompactMode = true;
+          notificationOverlayEnabled = true;
+          notificationPopupPosition = 1;
+
+          cursorSettings = {
+            size = 24;
+
+            niri = {
+              hideAfterInactiveMs = 0;
+              hideWhenTyping = true;
+            };
+          };
+
           barConfigs = [
             {
+              enabled = true;
+              visible = true;
+              id = "default";
+              name = "Main Bar";
+
+              position = 2;
+              spacing = 0;
+              transparency = 0.9;
+              fontScale = 0.8;
+              innerPadding = 2;
+              squareCorners = true;
+              openOnOverview = true;
+
+              widgetOutlineColor = "surfaceText";
+              widgetOutlineEnabled = true;
+              widgetOutlineOpacity = 0.1;
+              widgetPadding = 4;
+
               centerWidgets = [
                 "music"
                 "clock"
                 "weather"
               ];
-              enabled = true;
-              fontScale = 0.8;
-              id = "default";
-              innerPadding = 2;
+
               leftWidgets = [
                 "launcherButton"
                 "workspaceSwitcher"
                 "focusedWindow"
               ];
-              name = "Main Bar";
-              openOnOverview = true;
-              position = 2;
+
               rightWidgets = [
                 "systemTray"
                 "cpuUsage"
@@ -30,42 +79,8 @@
                 "battery"
                 "controlCenterButton"
               ];
-              spacing = 0;
-              squareCorners = true;
-              transparency = 0.9;
-              visible = true;
-              widgetOutlineColor = "surfaceText";
-              widgetOutlineEnabled = true;
-              widgetOutlineOpacity = 0.1;
-              widgetPadding = 4;
             }
           ];
-          blurEnabled = true;
-          clockCompactMode = true;
-          cornerRadius = 8;
-          currentThemeCategory = "dynamic";
-          currentThemeName = "dynamic";
-          cursorSettings.niri.hideAfterInactiveMs = 0;
-          cursorSettings.niri.hideWhenTyping = true;
-          cursorSettings.size = 24;
-          gtkThemingEnabled = true;
-          launcherLogoMode = "os";
-          lockBeforeSuspend = true;
-          lockScreenPowerOffMonitorsOnLock = true;
-          lockScreenShowDate = false;
-          lockScreenShowPowerActions = false;
-          lockScreenShowSystemIcons = false;
-          lockScreenShowTime = false;
-          matugenScheme = "scheme-content";
-          niriLayoutGapsOverride = 8;
-          notificationCompactMode = true;
-          notificationOverlayEnabled = true;
-          notificationPopupPosition = 1;
-          osdPowerProfileEnabled = true;
-          popupTransparency = 0.9;
-          terminalsAlwaysDark = true;
-          updaterHideWidget = true;
-          useAutoLocation = true;
         };
 
         clipboardSettings = {
