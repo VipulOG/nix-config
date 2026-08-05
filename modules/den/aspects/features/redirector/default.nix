@@ -4,7 +4,6 @@
       url = "github:vipulog/redirector-flake";
 
       inputs = {
-        nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
         git-hooks-nix.follows = "git-hooks-nix";
         treefmt-nix.follows = "treefmt-nix";

@@ -73,7 +73,6 @@
         flake-parts.follows = "flake-parts";
         git-hooks-nix.follows = "git-hooks-nix";
         home-manager.follows = "home-manager";
-        nixpkgs.follows = "nixpkgs";
         treefmt-nix.follows = "treefmt-nix";
       };
     };
