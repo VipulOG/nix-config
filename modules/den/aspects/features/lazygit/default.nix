@@ -5,8 +5,8 @@
         enable = true;
 
         settings = {
-          git.pagers = [
-            {pager = "${pkgs.delta}/bin/delta --dark --paging=never";}
+          git.diffRenderers = [
+            {command = "${pkgs.delta}/bin/delta --dark --paging=never";}
           ];
 
           gui = {
