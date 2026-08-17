@@ -14,7 +14,7 @@
           clockCompactMode = true;
           niriLayoutGapsOverride = 8;
           osdPowerProfileEnabled = true;
-          popupTransparency = 0.9;
+          popupTransparency = 1;
           terminalsAlwaysDark = true;
           updaterHideWidget = true;
           useAutoLocation = true;
@@ -53,6 +53,9 @@
               innerPadding = 2;
               squareCorners = true;
               openOnOverview = true;
+
+              borderEnabled = true;
+              borderOpacity = 0.1;
 
               widgetOutlineColor = "surfaceText";
               widgetOutlineEnabled = true;

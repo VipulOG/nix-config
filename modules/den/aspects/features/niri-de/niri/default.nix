@@ -24,6 +24,7 @@
       workspaces
       startup
       dms
+      misc
     ];
 
     nixos = {pkgs, ...}: {
@@ -53,6 +54,7 @@
           ${workspaces.configKdl}
           ${startup.configKdl}
           ${dms.configKdl}
+          ${misc.configKdl}
         '';
       };
     };
