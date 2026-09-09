@@ -84,6 +84,11 @@
           "Dev"
 
           ".cache/mesa_shader_cache"
+
+          {
+            directory = ".local/share/keyrings";
+            mode = "0700";
+          }
         ];
       };
     };
