@@ -4,6 +4,7 @@
       niri
       dms
       gtk
+      thunar
     ];
 
     homeManager = {pkgs, ...}: {
