@@ -76,20 +76,26 @@
           }
         ];
 
-        users.${user.name}.directories = [
-          "Documents"
-          "Music"
-          "Pictures"
-          "Videos"
-          "Dev"
+        users.${user.name} = {
+          files = [
+            ".config/mimeapps.list"
+          ];
 
-          ".cache/mesa_shader_cache"
+          directories = [
+            "Documents"
+            "Music"
+            "Pictures"
+            "Videos"
+            "Dev"
 
-          {
-            directory = ".local/share/keyrings";
-            mode = "0700";
-          }
-        ];
+            ".cache/mesa_shader_cache"
+
+            {
+              directory = ".local/share/keyrings";
+              mode = "0700";
+            }
+          ];
+        };
       };
     };
   };
