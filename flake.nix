@@ -32,7 +32,7 @@
     };
     import-tree.url = "github:vic/import-tree";
     my-secrets = {
-      url = "github:vipulog/nix-secrets/main?shallow=1";
+      url = "github:vipulog/nix-secrets/main";
       inputs = {
         flake-parts.follows = "flake-parts";
         git-hooks-nix.follows = "git-hooks-nix";

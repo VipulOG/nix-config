@@ -11,7 +11,7 @@
     };
 
     my-secrets = {
-      url = "github:vipulog/nix-secrets/main?shallow=1";
+      url = "github:vipulog/nix-secrets/main";
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
